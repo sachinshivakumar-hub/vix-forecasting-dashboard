@@ -52,11 +52,42 @@ st.set_page_config(
 # Custom CSS for professional dark theme styling
 st.markdown("""
 <style>
-    /* Dark theme background */
+    /* Full dark theme background */
+    * {
+        color: #e2e8f0;
+    }
+    
     .stApp {
         background-color: #0f172a;
     }
     
+    .stApp > header {
+        background-color: #0f172a;
+    }
+    
+    .stSidebar {
+        background-color: #1e293b;
+    }
+    
+    .stSidebar > div {
+        background-color: #1e293b;
+    }
+    
+    /* Main container */
+    .main {
+        background-color: #0f172a;
+    }
+    
+    /* Headers */
+    h1, h2, h3, h4, h5, h6 {
+        color: #f1f5f9 !important;
+    }
+    
+    .stMarkdown {
+        color: #e2e8f0;
+    }
+    
+    /* Main header gradient */
     .main-header {
         font-size: 3rem;
         font-weight: bold;
@@ -66,35 +97,137 @@ st.markdown("""
         text-align: center;
         padding: 1rem 0;
     }
+    
     .sub-header {
         font-size: 1.2rem;
-        color: #94a3b8;
+        color: #cbd5e1;
         text-align: center;
         margin-bottom: 2rem;
     }
+    
+    /* Metric cards */
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1.5rem;
         border-radius: 10px;
         color: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
     }
+    
+    /* Alert boxes */
     .stAlert {
-        background-color: #1e293b;
-        border-left: 4px solid #60a5fa;
-        color: #e2e8f0;
+        background-color: #1e293b !important;
+        border-left: 4px solid #60a5fa !important;
+        color: #e2e8f0 !important;
     }
-    div[data-testid="stMetricValue"] {
+    
+    .stAlert p {
+        color: #e2e8f0 !important;
+    }
+    
+    /* Metrics */
+    [data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: bold;
-        color: #60a5fa;
+        color: #60a5fa !important;
     }
-    div[data-testid="stMetricLabel"] {
-        color: #94a3b8;
+    
+    [data-testid="stMetricLabel"] {
+        color: #cbd5e1 !important;
     }
-    /* Style dataframes */
+    
+    [data-testid="stMetricDelta"] {
+        color: #94a3b8 !important;
+    }
+    
+    /* Dataframes */
     .stDataFrame {
-        background-color: #1e293b;
+        background-color: #1e293b !important;
+    }
+    
+    .stDataFrame th {
+        background-color: #334155 !important;
+        color: #e2e8f0 !important;
+    }
+    
+    .stDataFrame td {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+        border-color: #334155 !important;
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .stButton > button:hover {
+        background-color: #334155 !important;
+        color: #60a5fa !important;
+    }
+    
+    /* Radio buttons and checkboxes */
+    .stRadio > label {
+        color: #e2e8f0 !important;
+    }
+    
+    .stCheckbox > label {
+        color: #e2e8f0 !important;
+    }
+    
+    /* Input fields */
+    .stTextInput > div > div > input {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+        border-color: #334155 !important;
+    }
+    
+    .stSlider > div > div {
+        color: #e2e8f0 !important;
+    }
+    
+    /* Code blocks */
+    .stCode {
+        background-color: #1e293b !important;
+        color: #60a5fa !important;
+    }
+    
+    code {
+        color: #60a5fa !important;
+        background-color: #1e293b !important;
+        padding: 2px 6px;
+        border-radius: 3px;
+    }
+    
+    /* Expanders */
+    .streamlit-expanderHeader {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        background-color: #334155 !important;
+    }
+    
+    /* Table styling */
+    table {
+        color: #e2e8f0 !important;
+    }
+    
+    /* Links */
+    a {
+        color: #60a5fa !important;
+    }
+    
+    a:hover {
+        color: #a78bfa !important;
+    }
+    
+    /* Dividers */
+    hr {
+        border-color: #334155 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -316,7 +449,7 @@ with st.sidebar:
 # Header
 st.markdown('<p class="main-header">📈 VIX Volatility Forecasting Dashboard</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Advanced Time Series Analysis | FIN41660 Financial Econometrics</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #666; font-size: 14px; margin-top: -10px;">Econometrics Group: Karthik PSB, Sachin Shivakumar, Pavan, Alexander Pokhilo</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #cbd5e1; font-size: 14px; margin-top: -10px;">Econometrics Group: Karthik PSB, Sachin Shivakumar, Pavan, Alexander Pokhilo</p>', unsafe_allow_html=True)
 
 # Load data
 if uploaded_file:
@@ -1368,11 +1501,11 @@ elif model_choice == "🏆 Compare All":
 
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: #64748b; padding: 2rem 0;'>
-    <p><strong>VIX Volatility Forecasting Application</strong></p>
+<div style='text-align: center; color: #cbd5e1; padding: 2rem 0;'>
+    <p><strong style="color: #e2e8f0;">VIX Volatility Forecasting Application</strong></p>
     <p>FIN41660 Financial Econometrics | University College Dublin | 2025</p>
     <p>Built with Python, Streamlit, statsmodels, and arch</p>
-    <p style='font-size: 0.9rem; margin-top: 1rem;'>
+    <p style='font-size: 0.9rem; margin-top: 1rem; color: #94a3b8;'>
         Models: OLS AR(1) • ARIMA(p,d,q) • GARCH(1,1) with Student-t errors
     </p>
 </div>
