@@ -378,10 +378,8 @@ if model_choice == "📊 Overview":
     
     st.markdown("---")
     
-    # Date range info box
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.info(f"📅 **Data Coverage**: {df['Date'].min().strftime('%B %d, %Y')} to {df['Date'].max().strftime('%B %d, %Y')} • **{len(df):,} trading days** • **{(df['Date'].max() - df['Date'].min()).days / 365.25:.1f} years**")
+    # Date range info box (centered)
+    st.info(f"📅 **Data Coverage**: {df['Date'].min().strftime('%B %d, %Y')} to {df['Date'].max().strftime('%B %d, %Y')} • **{len(df):,} trading days** • **{(df['Date'].max() - df['Date'].min()).days / 365.25:.1f} years**")
     
     st.markdown("---")
     
