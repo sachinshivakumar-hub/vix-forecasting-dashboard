@@ -371,8 +371,6 @@ def diebold_mariano_test(actual, forecast1, forecast2):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 with st.sidebar:
-    st.image("https://via.placeholder.com/300x100/1e3a8a/ffffff?text=VIX+Forecasting", use_container_width=True)
-    
     st.markdown("---")
     st.header("⚙️ Configuration")
     
