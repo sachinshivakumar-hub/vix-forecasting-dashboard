@@ -49,13 +49,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for professional styling
+# Custom CSS for professional dark theme styling
 st.markdown("""
 <style>
+    /* Dark theme background */
+    .stApp {
+        background-color: #0f172a;
+    }
+    
     .main-header {
         font-size: 3rem;
         font-weight: bold;
-        background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+        background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
@@ -63,7 +68,7 @@ st.markdown("""
     }
     .sub-header {
         font-size: 1.2rem;
-        color: #64748b;
+        color: #94a3b8;
         text-align: center;
         margin-bottom: 2rem;
     }
@@ -72,15 +77,24 @@ st.markdown("""
         padding: 1.5rem;
         border-radius: 10px;
         color: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
     .stAlert {
-        background-color: #f0f9ff;
-        border-left: 4px solid #3b82f6;
+        background-color: #1e293b;
+        border-left: 4px solid #60a5fa;
+        color: #e2e8f0;
     }
     div[data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: bold;
+        color: #60a5fa;
+    }
+    div[data-testid="stMetricLabel"] {
+        color: #94a3b8;
+    }
+    /* Style dataframes */
+    .stDataFrame {
+        background-color: #1e293b;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -406,12 +420,11 @@ if model_choice == "📊 Overview":
         xaxis_title='Date',
         yaxis_title='VIX Level',
         hovermode='x unified',
-        template='plotly_white',
+        template='plotly_dark',
         height=500,
-        xaxis=dict(
-            rangeslider=dict(visible=True),
-            type='date'
-        )
+        plot_bgcolor='#1e293b',
+        paper_bgcolor='#0f172a',
+        font=dict(color='#e2e8f0')
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -440,9 +453,11 @@ if model_choice == "📊 Overview":
             xaxis_title='Date',
             yaxis_title='Return (%)',
             hovermode='x unified',
-            template='plotly_white',
+            template='plotly_dark',
             height=400,
-            xaxis=dict(type='date')
+            plot_bgcolor='#1e293b',
+            paper_bgcolor='#0f172a',
+            font=dict(color='#e2e8f0')
         )
         
         st.plotly_chart(fig_returns, use_container_width=True)
@@ -476,9 +491,12 @@ if model_choice == "📊 Overview":
         fig_hist.update_layout(
             xaxis_title='Return (%)',
             yaxis_title='Frequency',
-            template='plotly_white',
+            template='plotly_dark',
             height=400,
-            showlegend=True
+            showlegend=True,
+            plot_bgcolor='#1e293b',
+            paper_bgcolor='#0f172a',
+            font=dict(color='#e2e8f0')
         )
         
         st.plotly_chart(fig_hist, use_container_width=True)
@@ -651,8 +669,9 @@ elif model_choice == "📈 OLS AR(1)":
                 line=dict(color='purple', width=1),
                 name='Residuals'
             ))
-            fig_resid.add_hline(y=0, line_dash="dash", line_color="black")
-            fig_resid.update_layout(height=300, showlegend=False, template='plotly_white')
+            fig_resid.add_hline(y=0, line_dash="dash", line_color="white")
+            fig_resid.update_layout(height=300, showlegend=False, template='plotly_dark', 
+                                   plot_bgcolor='#1e293b', paper_bgcolor='#0f172a')
             st.plotly_chart(fig_resid, use_container_width=True)
         
         with col2:
@@ -664,7 +683,8 @@ elif model_choice == "📈 OLS AR(1)":
                 marker_color='steelblue',
                 opacity=0.7
             ))
-            fig_hist.update_layout(height=300, showlegend=False, template='plotly_white')
+            fig_hist.update_layout(height=300, showlegend=False, template='plotly_dark',
+                                  plot_bgcolor='#1e293b', paper_bgcolor='#0f172a')
             st.plotly_chart(fig_hist, use_container_width=True)
         
         with col3:
@@ -845,8 +865,11 @@ elif model_choice == "🔄 ARIMA":
                 xaxis_title='Date',
                 yaxis_title='Log Return (%)',
                 hovermode='x unified',
-                template='plotly_white',
-                height=500
+                template='plotly_dark',
+                height=500,
+                plot_bgcolor='#1e293b',
+                paper_bgcolor='#0f172a',
+                font=dict(color='#e2e8f0')
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -975,8 +998,11 @@ elif model_choice == "📉 GARCH(1,1)":
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
-                template='plotly_white',
-                height=400
+                template='plotly_dark',
+                height=400,
+                plot_bgcolor='#1e293b',
+                paper_bgcolor='#0f172a',
+                font=dict(color='#e2e8f0')
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -1022,8 +1048,11 @@ elif model_choice == "📉 GARCH(1,1)":
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
-                template='plotly_white',
-                height=500
+                template='plotly_dark',
+                height=500,
+                plot_bgcolor='#1e293b',
+                paper_bgcolor='#0f172a',
+                font=dict(color='#e2e8f0')
             )
             
             st.plotly_chart(fig_forecast, use_container_width=True)
@@ -1201,8 +1230,11 @@ elif model_choice == "🏆 Compare All":
                 xaxis_title='Date',
                 yaxis_title='Log Return (%)',
                 hovermode='x unified',
-                template='plotly_white',
+                template='plotly_dark',
                 height=500,
+                plot_bgcolor='#1e293b',
+                paper_bgcolor='#0f172a',
+                font=dict(color='#e2e8f0'),
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
             )
             
@@ -1240,8 +1272,11 @@ elif model_choice == "🏆 Compare All":
                 
                 fig_errors.update_layout(
                     yaxis_title='Forecast Error',
-                    template='plotly_white',
-                    height=400
+                    template='plotly_dark',
+                    height=400,
+                    plot_bgcolor='#1e293b',
+                    paper_bgcolor='#0f172a',
+                    font=dict(color='#e2e8f0')
                 )
                 
                 st.plotly_chart(fig_errors, use_container_width=True)
@@ -1275,8 +1310,11 @@ elif model_choice == "🏆 Compare All":
                 fig_cumsum.update_layout(
                     xaxis_title='Forecast Step',
                     yaxis_title='Cumulative Squared Error',
-                    template='plotly_white',
-                    height=400
+                    template='plotly_dark',
+                    height=400,
+                    plot_bgcolor='#1e293b',
+                    paper_bgcolor='#0f172a',
+                    font=dict(color='#e2e8f0')
                 )
                 
                 st.plotly_chart(fig_cumsum, use_container_width=True)
