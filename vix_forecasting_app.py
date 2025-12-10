@@ -343,10 +343,13 @@ if model_choice == "📊 Overview":
         )
     
     with col2:
+        start_date = df['Date'].min().strftime('%b %Y')
+        end_date = df['Date'].max().strftime('%b %Y')
         st.metric(
-            "📆 Time Span",
-            f"{(df['Date'].max() - df['Date'].min()).days} days",
-            help="Date range of the dataset"
+            "📆 Date Range",
+            f"{start_date} - {end_date}",
+            delta=f"{(df['Date'].max() - df['Date'].min()).days} days",
+            help="Full time period of the dataset"
         )
     
     with col3:
@@ -375,6 +378,13 @@ if model_choice == "📊 Overview":
     
     st.markdown("---")
     
+    # Date range info box
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.info(f"📅 **Data Coverage**: {df['Date'].min().strftime('%B %d, %Y')} to {df['Date'].max().strftime('%B %d, %Y')} • **{len(df):,} trading days** • **{(df['Date'].max() - df['Date'].min()).days / 365.25:.1f} years**")
+    
+    st.markdown("---")
+    
     # Interactive VIX price chart
     st.subheader("📈 VIX Index Historical Prices")
     
@@ -390,13 +400,20 @@ if model_choice == "📊 Overview":
         fillcolor='rgba(30, 58, 138, 0.1)'
     ))
     
+    # Add title with date range
+    chart_title = f"VIX Index Level Over Time ({df['Date'].min().year} - {df['Date'].max().year})"
+    
     fig.update_layout(
-        title='VIX Index Level Over Time',
+        title=chart_title,
         xaxis_title='Date',
         yaxis_title='VIX Level',
         hovermode='x unified',
         template='plotly_white',
-        height=500
+        height=500,
+        xaxis=dict(
+            rangeslider=dict(visible=True),
+            type='date'
+        )
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -421,11 +438,13 @@ if model_choice == "📊 Overview":
         fig_returns.add_hline(y=0, line_dash="dash", line_color="black", opacity=0.5)
         
         fig_returns.update_layout(
+            title=f"Log Returns ({df['Date'].min().year} - {df['Date'].max().year})",
             xaxis_title='Date',
             yaxis_title='Return (%)',
             hovermode='x unified',
             template='plotly_white',
-            height=400
+            height=400,
+            xaxis=dict(type='date')
         )
         
         st.plotly_chart(fig_returns, use_container_width=True)
