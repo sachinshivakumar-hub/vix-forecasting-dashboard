@@ -118,9 +118,9 @@ st.markdown("""
         padding-top: 3rem;
     }
     
-    /* Headers with cyan/blue solid colors */
+    /* Headers - All white for consistency */
     h1 {
-        color: #00D9FF !important;
+        color: #FFFFFF !important;
         font-weight: 800;
         letter-spacing: 0.5px;
         text-transform: uppercase;
@@ -130,7 +130,7 @@ st.markdown("""
     }
     
     h2 {
-        color: #00D9FF !important;
+        color: #FFFFFF !important;
         font-weight: 700;
         border-bottom: 3px solid #00D9FF;
         padding-bottom: 12px;
@@ -177,7 +177,7 @@ st.markdown("""
     .main-header {
         font-size: 4rem;
         font-weight: 800;
-        color: #00D9FF;
+        color: #FFFFFF;
         text-align: center;
         padding: 2rem 0 0.5rem 0;
         letter-spacing: 1px;
@@ -186,7 +186,7 @@ st.markdown("""
     
     .sub-header {
         font-size: 1.2rem;
-        color: #B8C5D0;
+        color: #FFFFFF;
         text-align: center;
         margin-bottom: 2rem;
         font-weight: 400;
@@ -205,14 +205,15 @@ st.markdown("""
     [data-testid="stMetricLabel"] {
         color: #FFFFFF !important;
         text-transform: uppercase;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 600;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         margin-bottom: 10px;
-        white-space: normal;
-        overflow-wrap: break-word;
-        line-height: 1.3;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
+        line-height: 1.2;
+        word-break: break-word;
     }
     
     [data-testid="stMetricDelta"] {
