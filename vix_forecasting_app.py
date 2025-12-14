@@ -115,39 +115,54 @@ st.markdown("""
     h1 {
         color: #E50914 !important;
         font-weight: 700;
-        letter-spacing: -0.5px;
+        letter-spacing: 0.5px;
         text-transform: uppercase;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        margin-bottom: 1.5rem;
     }
     
     h2 {
         color: #E50914 !important;
         font-weight: 600;
         border-bottom: 3px solid #E50914;
-        padding-bottom: 10px;
-        margin-top: 2rem;
+        padding-bottom: 12px;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        font-size: 1.5rem;
     }
     
     h3 {
         color: #FFFFFF !important;
         font-weight: 600;
         border-left: 4px solid #E50914;
-        padding-left: 12px;
+        padding-left: 16px;
+        margin-left: 4px;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
     }
     
     h4, h5, h6 {
         color: #FFFFFF !important;
         font-weight: 500;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
     }
     
     /* Text styling */
     .stMarkdown {
         color: #B3B3B3;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
     }
     
     p, li, span {
         color: #B3B3B3 !important;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
     }
     
     /* Main header */
@@ -171,27 +186,37 @@ st.markdown("""
     
     /* Metric cards - Netflix red accent */
     [data-testid="stMetricValue"] {
-        font-size: 2rem;
+        font-size: 1.75rem;
         font-weight: 700;
         color: #E50914 !important;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        white-space: nowrap;
+        overflow: visible;
     }
     
     [data-testid="stMetricLabel"] {
         color: #B3B3B3 !important;
         text-transform: uppercase;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         font-weight: 500;
-        letter-spacing: 1px;
+        letter-spacing: 1.2px;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        margin-bottom: 8px;
+        white-space: normal;
+        overflow-wrap: break-word;
     }
     
     [data-testid="stMetricDelta"] {
         color: #808080 !important;
+        font-size: 0.85rem;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
     }
     
     /* Data tables */
     .stDataFrame {
         background-color: #000000 !important;
         border: 1px solid #E50914 !important;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
     }
     
     .stDataFrame th {
@@ -199,16 +224,23 @@ st.markdown("""
         color: #FFFFFF !important;
         font-weight: 700;
         text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-        padding: 12px 8px !important;
+        font-size: 0.75rem;
+        letter-spacing: 1.2px;
+        padding: 12px 10px !important;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
     }
     
     .stDataFrame td {
         background-color: #0a0a0a !important;
         color: #FFFFFF !important;
         border-color: #1a1a1a !important;
-        padding: 10px 8px !important;
+        padding: 10px 10px !important;
+        font-size: 0.9rem;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
     }
     
     .stDataFrame tr:hover td {
@@ -219,6 +251,7 @@ st.markdown("""
     table {
         border-collapse: collapse !important;
         border: 1px solid #E50914 !important;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
     }
     
     /* Buttons - Netflix style */
@@ -228,10 +261,12 @@ st.markdown("""
         border: none !important;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         padding: 0.75rem 2rem;
         border-radius: 4px;
         transition: all 0.3s ease;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        font-size: 0.85rem;
     }
     
     .stButton > button:hover {
@@ -244,10 +279,17 @@ st.markdown("""
     .stRadio > label, .stCheckbox > label {
         color: #B3B3B3 !important;
         font-weight: 500;
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        font-size: 0.9rem;
     }
     
     .stRadio > div {
         background-color: transparent !important;
+    }
+    
+    .stRadio label[data-baseweb="radio"] {
+        font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+        padding: 8px 0;
     }
     
     /* Input fields */
@@ -277,6 +319,8 @@ st.markdown("""
         background-color: #000000 !important;
         color: #E50914 !important;
         border: 1px solid #2a2a2a;
+        font-family: 'Courier New', 'Consolas', monospace;
+        font-size: 0.85rem;
     }
     
     code {
@@ -284,7 +328,8 @@ st.markdown("""
         background-color: #1a1a1a !important;
         padding: 3px 8px;
         border-radius: 4px;
-        font-family: 'Courier New', monospace;
+        font-family: 'Courier New', 'Consolas', monospace;
+        font-size: 0.85rem;
     }
     
     /* Expanders */
@@ -722,7 +767,7 @@ if model_choice == "Overview":
     chart_title = f"VIX Index Level Over Time ({df['Date'].min().year} - {df['Date'].max().year})"
     
     fig.update_layout(
-        title=dict(text=chart_title, font=dict(color='#FFFFFF', size=16)),
+        title=dict(text=chart_title, font=dict(color='#FFFFFF', size=16, family='Computer Modern, Times New Roman, serif')),
         xaxis_title='Date',
         yaxis_title='VIX Level',
         hovermode='x unified',
@@ -730,16 +775,18 @@ if model_choice == "Overview":
         height=500,
         plot_bgcolor='#000000',
         paper_bgcolor='#000000',
-        font=dict(color='#FFFFFF', family='Arial, sans-serif'),
+        font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=12),
         xaxis=dict(
             gridcolor='#1a1a1a',
             showgrid=True,
-            color='#FFFFFF'
+            color='#FFFFFF',
+            title_font=dict(size=13, family='Computer Modern, Times New Roman, serif')
         ),
         yaxis=dict(
             gridcolor='#1a1a1a',
             showgrid=True,
-            color='#FFFFFF'
+            color='#FFFFFF',
+            title_font=dict(size=13, family='Computer Modern, Times New Roman, serif')
         )
     )
     
@@ -765,7 +812,7 @@ if model_choice == "Overview":
         fig_returns.add_hline(y=0, line_dash="dash", line_color="#FFFFFF", opacity=0.3)
         
         fig_returns.update_layout(
-            title=dict(text=f"Log Returns ({df['Date'].min().year} - {df['Date'].max().year})", font=dict(color='#FFFFFF')),
+            title=dict(text=f"Log Returns ({df['Date'].min().year} - {df['Date'].max().year})", font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
             xaxis_title='Date',
             yaxis_title='Return (%)',
             hovermode='x unified',
@@ -773,9 +820,9 @@ if model_choice == "Overview":
             height=400,
             plot_bgcolor='#000000',
             paper_bgcolor='#000000',
-            font=dict(color='#FFFFFF'),
-            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF'),
-            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF')
+            font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
+            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12))
         )
         
         st.plotly_chart(fig_returns, use_container_width=True)
@@ -814,9 +861,10 @@ if model_choice == "Overview":
             showlegend=True,
             plot_bgcolor='#000000',
             paper_bgcolor='#000000',
-            font=dict(color='#FFFFFF'),
-            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF'),
-            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF')
+            font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
+            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
+            legend=dict(font=dict(size=11))
         )
         
         st.plotly_chart(fig_hist, use_container_width=True)
@@ -1008,9 +1056,9 @@ elif model_choice == "OLS AR(1)":
             fig_resid.add_hline(y=0, line_dash="dash", line_color="#FFFFFF")
             fig_resid.update_layout(height=300, showlegend=False, template='plotly_dark', 
                                    plot_bgcolor='#000000', paper_bgcolor='#000000',
-                                   font=dict(color='#FFFFFF'),
-                                   xaxis=dict(gridcolor='#1a1a1a'),
-                                   yaxis=dict(gridcolor='#1a1a1a'))
+                                   font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=10),
+                                   xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)),
+                                   yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)))
             st.plotly_chart(fig_resid, use_container_width=True)
         
         with col2:
@@ -1024,9 +1072,9 @@ elif model_choice == "OLS AR(1)":
             ))
             fig_hist.update_layout(height=300, showlegend=False, template='plotly_dark',
                                   plot_bgcolor='#000000', paper_bgcolor='#000000',
-                                  font=dict(color='#FFFFFF'),
-                                  xaxis=dict(gridcolor='#1a1a1a'),
-                                  yaxis=dict(gridcolor='#1a1a1a'))
+                                  font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=10),
+                                  xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)),
+                                  yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)))
             st.plotly_chart(fig_hist, use_container_width=True)
         
         with col3:
@@ -1213,7 +1261,8 @@ elif model_choice == " ARIMA":
             ))
             
             fig.update_layout(
-                title=f'ARIMA{arima_order} Forecast vs Actual Returns',
+                title=dict(text=f'ARIMA{arima_order} Forecast vs Actual Returns', 
+                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
                 xaxis_title='Date',
                 yaxis_title='Log Return (%)',
                 hovermode='x unified',
@@ -1221,7 +1270,10 @@ elif model_choice == " ARIMA":
                 height=500,
                 plot_bgcolor='#000000',
                 paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF')
+                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                legend=dict(font=dict(size=11))
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -1346,7 +1398,8 @@ elif model_choice == " GARCH(1,1)":
             ))
             
             fig.update_layout(
-                title='In-Sample Conditional Volatility (GARCH)',
+                title=dict(text='In-Sample Conditional Volatility (GARCH)',
+                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
@@ -1354,7 +1407,10 @@ elif model_choice == " GARCH(1,1)":
                 height=400,
                 plot_bgcolor='#000000',
                 paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF')
+                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                legend=dict(font=dict(size=11))
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -1396,7 +1452,8 @@ elif model_choice == " GARCH(1,1)":
             fig_forecast.add_vline(x=last_date, line_dash="dash", line_color="black", opacity=0.5)
             
             fig_forecast.update_layout(
-                title=f'GARCH(1,1) Volatility Forecast ({forecast_horizon} days ahead)',
+                title=dict(text=f'GARCH(1,1) Volatility Forecast ({forecast_horizon} days ahead)',
+                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
@@ -1404,7 +1461,10 @@ elif model_choice == " GARCH(1,1)":
                 height=500,
                 plot_bgcolor='#000000',
                 paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF')
+                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                legend=dict(font=dict(size=11))
             )
             
             st.plotly_chart(fig_forecast, use_container_width=True)
@@ -1578,7 +1638,8 @@ elif model_choice == " Compare All":
             fig.add_hline(y=0, line_dash="solid", line_color="gray", opacity=0.3)
             
             fig.update_layout(
-                title='Model Forecast Comparison (Test Set)',
+                title=dict(text='Model Forecast Comparison (Test Set)',
+                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
                 xaxis_title='Date',
                 yaxis_title='Log Return (%)',
                 hovermode='x unified',
@@ -1586,8 +1647,10 @@ elif model_choice == " Compare All":
                 height=500,
                 plot_bgcolor='#000000',
                 paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF'),
-                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11))
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -1628,7 +1691,9 @@ elif model_choice == " Compare All":
                     height=400,
                     plot_bgcolor='#000000',
                     paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF')
+                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                    xaxis=dict(title_font=dict(size=12)),
+                    yaxis=dict(title_font=dict(size=12))
                 )
                 
                 st.plotly_chart(fig_errors, use_container_width=True)
@@ -1666,7 +1731,10 @@ elif model_choice == " Compare All":
                     height=400,
                     plot_bgcolor='#000000',
                     paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF')
+                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    legend=dict(font=dict(size=11))
                 )
                 
                 st.plotly_chart(fig_cumsum, use_container_width=True)
