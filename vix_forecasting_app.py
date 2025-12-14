@@ -1147,7 +1147,7 @@ elif model_choice == "OLS AR(1)":
 # PAGE: ARIMA MODEL
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == " ARIMA":
+elif model_choice == "ARIMA":
     st.header(f"ARIMA{arima_order} Model")
     st.markdown(f"Box-Jenkins model with order (p={p_order}, d={d_order}, q={q_order})")
     
@@ -1319,7 +1319,7 @@ elif model_choice == " ARIMA":
 # PAGE: GARCH MODEL
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == " GARCH(1,1)":
+elif model_choice == "GARCH(1,1)":
     st.header("GARCH(1,1) Volatility Model")
     st.markdown("Volatility clustering model: $\\sigma_t^2 = \\omega + \\alpha \\varepsilon_{t-1}^2 + \\beta \\sigma_{t-1}^2$")
     
@@ -1492,7 +1492,7 @@ elif model_choice == " GARCH(1,1)":
 # PAGE: MODEL COMPARISON
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == " Compare All":
+elif model_choice == "Compare All":
     st.header("Model Comparison Dashboard")
     st.markdown("Comprehensive comparison of OLS, ARIMA, and GARCH models")
     
