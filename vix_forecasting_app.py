@@ -171,15 +171,18 @@ st.markdown("""
     
     /* Metric cards */
     [data-testid="stMetricValue"] {
-        font-size: 1.5rem;
+        font-size: 0.95rem;
         font-weight: bold;
         color: #60a5fa !important;
+        line-height: 1.2;
+        word-wrap: break-word;
+        white-space: normal !important;
     }
     
     [data-testid="stMetricLabel"] {
         color: #FFFFFF !important;
         text-transform: uppercase;
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         font-weight: 600;
         letter-spacing: 0.3px;
         margin-bottom: 8px;
@@ -191,7 +194,7 @@ st.markdown("""
     
     [data-testid="stMetricDelta"] {
         color: #cbd5e1 !important;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
     
     /* Alert boxes */
