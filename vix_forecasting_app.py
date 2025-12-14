@@ -365,13 +365,74 @@ st.markdown("""
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background-color: #1e293b;
-        border: 2px dashed #334155;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 2px dashed #60a5fa;
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        transition: all 0.3s ease;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #60a5fa;
+        border-color: #a78bfa;
+        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+        box-shadow: 0 8px 24px rgba(96, 165, 250, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    [data-testid="stFileUploader"] section {
+        border: none !important;
+        background-color: transparent !important;
+    }
+    
+    [data-testid="stFileUploader"] section button {
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px;
+        padding: 0.75rem 2rem !important;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    [data-testid="stFileUploader"] section button:hover {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+        transform: translateY(-1px);
+    }
+    
+    [data-testid="stFileUploader"] small {
+        color: #cbd5e1 !important;
+        font-size: 0.9rem;
+    }
+    
+    /* Upload section styling */
+    .upload-container {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 2px solid #60a5fa;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .upload-icon {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #60a5fa;
+    }
+    
+    .upload-text {
+        text-align: center;
+        color: #cbd5e1;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .upload-hint {
+        text-align: center;
+        color: #64748b;
+        font-size: 0.85rem;
+        font-style: italic;
     }
     
     /* Selectbox */
@@ -637,33 +698,57 @@ def diebold_mariano_test(actual, forecast1, forecast2):
 
 with st.sidebar:
     st.markdown("---")
-    st.header("Configuration")
+    st.header("⚙️ Configuration")
     
-    # File upload
-    st.subheader("Data Upload")
+    # File upload with custom styling
+    st.subheader("📁 Data Upload")
+    
+    # Custom upload container
+    st.markdown("""
+        <div style='text-align: center; padding: 0.5rem 0;'>
+            <div style='font-size: 2.5rem; margin-bottom: 0.5rem;'>📊</div>
+            <div style='color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.3rem;'>
+                Drag & Drop your VIX CSV file
+            </div>
+            <div style='color: #64748b; font-size: 0.8rem; font-style: italic;'>
+                or click browse to select
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+    
     uploaded_file = st.file_uploader(
-        "Upload VIX CSV file",
+        "Upload File",
         type=['csv'],
-        help="Upload your VIX data CSV file with Date and Price columns"
+        help="Upload your VIX data CSV file with Date and Price columns",
+        label_visibility="collapsed"
     )
     
-    use_sample = st.checkbox("Use sample VIX data", value=not uploaded_file)
+    if uploaded_file:
+        st.success(f"✅ File loaded: {uploaded_file.name}")
+        st.info(f"📏 Size: {uploaded_file.size / 1024:.2f} KB")
+    
+    use_sample = st.checkbox(
+        "📈 Use sample VIX data", 
+        value=not uploaded_file,
+        help="Load pre-loaded VIX historical data for testing"
+    )
     
     st.markdown("---")
     
     # Model selection
-    st.subheader("Model Selection")
+    st.subheader("🤖 Model Selection")
     model_choice = st.radio(
         "Choose forecasting model:",
         ["Overview", "OLS AR(1)", "ARIMA", "GARCH(1,1)", "Compare All"],
-        index=0
+        index=0,
+        help="Select the time series model for VIX forecasting"
     )
     
     st.markdown("---")
     
     # Model parameters
     if "ARIMA" in model_choice:
-        st.subheader("ARIMA Parameters")
+        st.subheader("🎛️ ARIMA Parameters")
         p_order = st.slider("AR order (p)", 0, 5, 1, help="Autoregressive order")
         d_order = st.slider("Differencing (d)", 0, 2, 0, help="Degree of differencing")
         q_order = st.slider("MA order (q)", 0, 5, 1, help="Moving average order")
@@ -672,7 +757,7 @@ with st.sidebar:
     st.markdown("---")
     
     # Analysis parameters
-    st.subheader("Analysis Settings")
+    st.subheader("⚡ Analysis Settings")
     train_size = st.slider(
         "Training set size (%)",
         50, 95, 80,
@@ -686,7 +771,7 @@ with st.sidebar:
     )
     
     use_full_data = st.checkbox(
-        "Use full dataset for training",
+        "🎯 Use full dataset for training",
         value=False,
         help="If checked: trains on 100% of data and forecasts future dates. If unchecked: uses train/test split for validation."
     )
