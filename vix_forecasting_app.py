@@ -419,7 +419,82 @@ st.markdown("""
     ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     }
+    
+    /* Sidebar toggle button */
+    .sidebar-toggle {
+        position: fixed;
+        top: 4rem;
+        left: 0;
+        z-index: 999999;
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+        color: white;
+        border: none;
+        border-radius: 0 8px 8px 0;
+        padding: 12px 8px;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar-toggle:hover {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        padding-left: 12px;
+    }
+    
+    /* Adjust sidebar for collapse */
+    section[data-testid="stSidebar"] {
+        transition: margin-left 0.3s ease;
+    }
+    
+    section[data-testid="stSidebar"].collapsed {
+        margin-left: -21rem;
+    }
 </style>
+
+<script>
+    // Add sidebar toggle functionality
+    function addSidebarToggle() {
+        // Check if button already exists
+        if (document.querySelector('.sidebar-toggle')) return;
+        
+        // Create toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'sidebar-toggle';
+        toggleBtn.innerHTML = '☰';
+        toggleBtn.title = 'Toggle Sidebar';
+        
+        // Add click handler
+        toggleBtn.addEventListener('click', function() {
+            const sidebar = document.querySelector('section[data-testid="stSidebar"]');
+            const mainContent = document.querySelector('section.main');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                sidebar.classList.remove('collapsed');
+                toggleBtn.innerHTML = '☰';
+                toggleBtn.style.left = '0';
+            } else {
+                sidebar.classList.add('collapsed');
+                toggleBtn.innerHTML = '☰';
+                toggleBtn.style.left = '0';
+            }
+        });
+        
+        document.body.appendChild(toggleBtn);
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addSidebarToggle);
+    } else {
+        addSidebarToggle();
+    }
+    
+    // Re-add button on Streamlit reruns
+    window.addEventListener('load', function() {
+        setTimeout(addSidebarToggle, 100);
+    });
+</script>
 """, unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
