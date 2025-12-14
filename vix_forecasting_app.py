@@ -205,14 +205,14 @@ st.markdown("""
     [data-testid="stMetricLabel"] {
         color: #FFFFFF !important;
         text-transform: uppercase;
-        font-size: 0.65rem;
+        font-size: 0.5rem;
         font-weight: 600;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         white-space: normal !important;
         overflow-wrap: break-word !important;
-        line-height: 1.2;
+        line-height: 1.1;
         word-break: break-word;
     }
     
