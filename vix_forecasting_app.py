@@ -116,17 +116,18 @@ st.markdown("""
         font-weight: 700;
         font-size: 1.8rem;
         border-bottom: 3px solid #60a5fa;
-        padding-bottom: 12px;
+        padding-bottom: 15px;
         margin-top: 2.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
     
     h3 {
         font-weight: 600;
         font-size: 1.3rem;
         border-left: 5px solid #60a5fa;
-        padding-left: 20px;
-        margin-left: 4px;
+        padding-left: 25px;
+        margin-left: 8px;
+        margin-bottom: 1.5rem;
     }
     
     .stMarkdown {
