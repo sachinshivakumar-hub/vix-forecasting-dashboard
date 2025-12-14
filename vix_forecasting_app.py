@@ -49,120 +49,88 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Dark Blue Colorful Theme with Excellent Readability
+# Beautiful Dark Theme with Blue Gradients - Original Style
 st.markdown("""
 <style>
-    /* Dark Blue Color Palette */
-    :root {
-        --primary-blue: #00D9FF;
-        --electric-blue: #0099FF;
-        --deep-blue: #0A1929;
-        --navy-blue: #001E3C;
-        --white: #FFFFFF;
-        --light-gray: #E8F0F8;
-        --medium-gray: #B8C5D0;
-        --accent-cyan: #00FFFF;
-        --accent-purple: #9D4EDD;
-        --accent-pink: #FF006E;
-        --success-green: #06FFA5;
-        --warning-orange: #FFB800;
+    /* Full dark theme background */
+    * {
+        color: #FFFFFF;
     }
     
-    /* Global dark blue background */
     .stApp {
-        background: linear-gradient(135deg, #001E3C 0%, #0A1929 100%) !important;
+        background-color: #0f172a;
     }
     
     .stApp > header {
-        background: linear-gradient(135deg, #001E3C 0%, #0A1929 100%) !important;
+        background-color: #0f172a;
     }
     
-    /* Top toolbar */
     header[data-testid="stHeader"] {
-        background: linear-gradient(135deg, #001E3C 0%, #0A1929 100%) !important;
+        background-color: #0f172a !important;
     }
     
-    /* Main block container */
     .block-container {
-        background: transparent !important;
+        background-color: #0f172a !important;
     }
     
-    /* All sections */
     section[data-testid="stSidebar"],
     section.main {
-        background: transparent !important;
+        background-color: #0f172a !important;
     }
     
-    /* Sidebar styling */
     .stSidebar {
-        background: linear-gradient(180deg, #001E3C 0%, #0A1929 100%) !important;
-        border-right: 3px solid #00D9FF !important;
-        box-shadow: 4px 0 20px rgba(0, 217, 255, 0.2);
+        background-color: #1e293b;
+        border-right: 2px solid #60a5fa !important;
     }
     
     .stSidebar > div {
-        background: transparent !important;
+        background-color: #1e293b;
     }
     
     [data-testid="stSidebarNav"] {
-        background: transparent !important;
+        background-color: #1e293b !important;
     }
     
     /* Main container */
     .main {
-        background: transparent !important;
+        background-color: #0f172a;
     }
     
     .main .block-container {
-        background: transparent !important;
+        background-color: #0f172a !important;
         padding-top: 3rem;
     }
     
-    /* Headers - All white for consistency */
-    h1 {
+    /* Headers - All white */
+    h1, h2, h3, h4, h5, h6 {
         color: #FFFFFF !important;
-        font-weight: 800;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        margin-bottom: 1.5rem;
+    }
+    
+    h1 {
+        font-weight: 800;
         font-size: 2.8rem !important;
     }
     
     h2 {
-        color: #FFFFFF !important;
         font-weight: 700;
-        border-bottom: 3px solid #00D9FF;
+        font-size: 1.8rem;
+        border-bottom: 3px solid #60a5fa;
         padding-bottom: 12px;
         margin-top: 2.5rem;
         margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 1.8rem;
     }
     
     h3 {
-        color: #FFFFFF !important;
         font-weight: 600;
-        border-left: 5px solid #0099FF;
+        font-size: 1.3rem;
+        border-left: 5px solid #60a5fa;
         padding-left: 20px;
         margin-left: 4px;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
     }
     
-    h4, h5, h6 {
-        color: #FFFFFF !important;
-        font-weight: 600;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    }
-    
-    /* Text styling - Enhanced readability */
     .stMarkdown {
         color: #FFFFFF;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     }
     
     p, li, span {
@@ -170,18 +138,17 @@ st.markdown("""
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         font-size: 1.05rem;
         line-height: 1.8;
-        font-weight: 400;
     }
     
-    /* Main header */
+    /* Main header gradient */
     .main-header {
-        font-size: 4rem;
-        font-weight: 800;
-        color: #FFFFFF;
+        font-size: 3rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        padding: 2rem 0 0.5rem 0;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        padding: 1rem 0;
     }
     
     .sub-header {
@@ -189,17 +156,13 @@ st.markdown("""
         color: #FFFFFF;
         text-align: center;
         margin-bottom: 2rem;
-        font-weight: 400;
     }
     
-    /* Metric cards - Elegant solid colors */
+    /* Metric cards */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
-        font-weight: 800;
-        color: #00D9FF !important;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        white-space: nowrap;
-        overflow: visible;
+        font-weight: bold;
+        color: #60a5fa !important;
     }
     
     [data-testid="stMetricLabel"] {
@@ -208,7 +171,6 @@ st.markdown("""
         font-size: 0.5rem;
         font-weight: 600;
         letter-spacing: 0.3px;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         margin-bottom: 8px;
         white-space: normal !important;
         overflow-wrap: break-word !important;
@@ -217,85 +179,76 @@ st.markdown("""
     }
     
     [data-testid="stMetricDelta"] {
-        color: #B8C5D0 !important;
-        font-size: 0.9rem;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        font-weight: 500;
+        color: #cbd5e1 !important;
     }
     
-    /* Data tables */
+    /* Alert boxes */
+    .stAlert {
+        background-color: #1e293b !important;
+        border-left: 4px solid #60a5fa !important;
+        color: #FFFFFF !important;
+    }
+    
+    .stAlert p {
+        color: #FFFFFF !important;
+    }
+    
+    /* Dataframes */
     .stDataFrame {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border: 2px solid #00D9FF !important;
+        background-color: #1e293b !important;
+        border: 2px solid #60a5fa !important;
         border-radius: 8px;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
     }
     
     .stDataFrame th {
-        background: linear-gradient(135deg, #0099FF 0%, #00D9FF 100%) !important;
+        background-color: #334155 !important;
         color: #FFFFFF !important;
         font-weight: 700;
         text-transform: uppercase;
         font-size: 0.85rem;
-        letter-spacing: 1.5px;
         padding: 14px 12px !important;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        white-space: normal !important;
-        overflow-wrap: break-word !important;
     }
     
     .stDataFrame td {
-        background-color: rgba(10, 25, 41, 0.4) !important;
+        background-color: #1e293b !important;
         color: #FFFFFF !important;
-        border-color: rgba(0, 217, 255, 0.2) !important;
+        border-color: #334155 !important;
         padding: 12px 12px !important;
         font-size: 1rem;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        white-space: normal !important;
-        overflow-wrap: break-word !important;
-        font-weight: 400;
     }
     
     .stDataFrame tr:hover td {
-        background-color: rgba(0, 153, 255, 0.15) !important;
+        background-color: #334155 !important;
     }
     
-    /* Table borders */
     table {
         border-collapse: collapse !important;
-        border: 2px solid #00D9FF !important;
-        border-radius: 8px;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        border: 2px solid #60a5fa !important;
+        color: #FFFFFF !important;
     }
     
-    /* Buttons - Blue gradient style */
+    /* Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #0099FF 0%, #00D9FF 100%) !important;
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%) !important;
         color: #FFFFFF !important;
         border: none !important;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 2px;
         padding: 0.85rem 2.5rem;
         border-radius: 8px;
-        transition: all 0.3s ease;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 0.95rem;
-        box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
     }
     
     .stButton > button:hover {
-        background: linear-gradient(135deg, #00D9FF 0%, #00FFFF 100%) !important;
-        box-shadow: 0 6px 30px rgba(0, 217, 255, 0.6);
-        transform: translateY(-3px);
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+        box-shadow: 0 6px 20px rgba(96, 165, 250, 0.5);
+        transform: translateY(-2px);
     }
     
     /* Radio buttons and checkboxes */
     .stRadio > label, .stCheckbox > label {
         color: #FFFFFF !important;
         font-weight: 600;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         font-size: 1rem;
     }
     
@@ -303,29 +256,22 @@ st.markdown("""
         background-color: transparent !important;
     }
     
-    .stRadio label[data-baseweb="radio"] {
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        padding: 10px 0;
-    }
-    
     /* Input fields */
     .stTextInput > div > div > input {
-        background-color: rgba(10, 25, 41, 0.6) !important;
+        background-color: #1e293b !important;
         color: #FFFFFF !important;
-        border: 2px solid rgba(0, 153, 255, 0.3) !important;
+        border: 2px solid #334155 !important;
         border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 400;
     }
     
     .stTextInput > div > div > input:focus {
-        border-color: #00D9FF !important;
-        box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.3) !important;
+        border-color: #60a5fa !important;
+        box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3) !important;
     }
     
     /* Sliders */
     .stSlider > div > div > div {
-        background-color: #00D9FF !important;
+        background-color: #60a5fa !important;
     }
     
     .stSlider > div > div {
@@ -334,133 +280,108 @@ st.markdown("""
     
     /* Code blocks */
     .stCode {
-        background-color: rgba(10, 25, 41, 0.8) !important;
-        color: #00D9FF !important;
-        border: 1px solid rgba(0, 153, 255, 0.3);
+        background-color: #1e293b !important;
+        color: #60a5fa !important;
+        border: 1px solid #334155;
         border-radius: 6px;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        font-size: 0.9rem;
     }
     
     code {
-        color: #00FFFF !important;
-        background-color: rgba(10, 25, 41, 0.6) !important;
+        color: #60a5fa !important;
+        background-color: #1e293b !important;
         padding: 4px 10px;
         border-radius: 6px;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        font-size: 0.9rem;
-        font-weight: 500;
     }
     
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: rgba(10, 25, 41, 0.6) !important;
+        background-color: #1e293b !important;
         color: #FFFFFF !important;
-        border: 2px solid rgba(0, 153, 255, 0.3);
+        border: 2px solid #334155;
         border-radius: 8px;
         font-weight: 600;
-        font-size: 1.05rem;
     }
     
     .streamlit-expanderHeader:hover {
-        background-color: rgba(0, 153, 255, 0.2) !important;
-        border-color: #00D9FF !important;
-    }
-    
-    /* Alert boxes */
-    .stAlert {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-left: 5px solid #00D9FF !important;
-        color: #FFFFFF !important;
-        border-radius: 6px;
+        background-color: #334155 !important;
+        border-color: #60a5fa !important;
     }
     
     /* Info boxes */
     div[data-baseweb="notification"] {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-left: 5px solid #0099FF !important;
-        border-radius: 6px;
+        background-color: #1e293b !important;
+        border-left: 5px solid #60a5fa !important;
     }
     
-    /* Success boxes */
     .stSuccess {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-left: 5px solid #06FFA5 !important;
-        border-radius: 6px;
+        background-color: #1e293b !important;
+        border-left: 5px solid #10b981 !important;
     }
     
-    /* Warning boxes */
     .stWarning {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-left: 5px solid #FFB800 !important;
-        border-radius: 6px;
+        background-color: #1e293b !important;
+        border-left: 5px solid #f59e0b !important;
     }
     
-    /* Error boxes */
     .stError {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-left: 5px solid #FF006E !important;
-        border-radius: 6px;
+        background-color: #1e293b !important;
+        border-left: 5px solid #ef4444 !important;
     }
     
     /* Links */
     a {
-        color: #00D9FF !important;
-        text-decoration: none;
+        color: #60a5fa !important;
         font-weight: 600;
+        text-decoration: none;
     }
     
     a:hover {
-        color: #00FFFF !important;
+        color: #a78bfa !important;
         text-decoration: underline;
     }
     
     /* Dividers */
     hr {
-        border-color: rgba(0, 153, 255, 0.3) !important;
+        border-color: #334155 !important;
         margin: 2.5rem 0;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background-color: rgba(10, 25, 41, 0.6);
-        border: 2px dashed rgba(0, 153, 255, 0.5);
+        background-color: #1e293b;
+        border: 2px dashed #334155;
         border-radius: 12px;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #00D9FF;
-        box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+        border-color: #60a5fa;
     }
     
     /* Selectbox */
     .stSelectbox > div > div {
-        background-color: rgba(10, 25, 41, 0.6) !important;
-        border-color: rgba(0, 153, 255, 0.3) !important;
+        background-color: #1e293b !important;
+        border-color: #334155 !important;
         color: #FFFFFF !important;
         border-radius: 8px;
-        font-size: 1rem;
     }
     
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        background-color: transparent;
+        background-color: #0f172a;
     }
     
     .stTabs [data-baseweb="tab"] {
-        background-color: rgba(10, 25, 41, 0.6);
-        color: #B8C5D0;
+        background-color: #1e293b;
+        color: #cbd5e1;
         border-radius: 8px 8px 0 0;
         font-weight: 600;
-        font-size: 1rem;
         padding: 12px 24px;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #0099FF 0%, #00D9FF 100%) !important;
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%) !important;
         color: #FFFFFF !important;
-        box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
     }
     
     /* Scrollbar */
@@ -470,16 +391,16 @@ st.markdown("""
     }
     
     ::-webkit-scrollbar-track {
-        background: #0A1929;
+        background: #0f172a;
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #0099FF 0%, #00D9FF 100%);
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
         border-radius: 6px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #00D9FF 0%, #00FFFF 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -811,17 +732,17 @@ if model_choice == "Overview":
         hovermode='x unified',
         template='plotly_dark',
         height=500,
-        plot_bgcolor='rgba(10, 25, 41, 0.4)',
-        paper_bgcolor='rgba(10, 25, 41, 0.2)',
+        plot_bgcolor="#0f172a",
+        paper_bgcolor="#0f172a",
         font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=12),
         xaxis=dict(
-            gridcolor='rgba(0, 153, 255, 0.15)',
+            gridcolor="#334155",
             showgrid=True,
             color='#FFFFFF',
             title_font=dict(size=13, family='Segoe UI, Helvetica Neue, Arial, sans-serif')
         ),
         yaxis=dict(
-            gridcolor='rgba(0, 153, 255, 0.15)',
+            gridcolor="#334155",
             showgrid=True,
             color='#FFFFFF',
             title_font=dict(size=13, family='Segoe UI, Helvetica Neue, Arial, sans-serif')
@@ -843,7 +764,7 @@ if model_choice == "Overview":
             y=df['LogReturn'],
             mode='lines',
             name='Log Returns',
-            line=dict(color='#0099FF', width=1.5),
+            line=dict(color="#60a5fa", width=1.5),
             opacity=0.85
         ))
         
@@ -856,11 +777,11 @@ if model_choice == "Overview":
             hovermode='x unified',
             template='plotly_dark',
             height=400,
-            plot_bgcolor='rgba(10, 25, 41, 0.4)',
-            paper_bgcolor='rgba(10, 25, 41, 0.2)',
+            plot_bgcolor="#0f172a",
+            paper_bgcolor="#0f172a",
             font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-            xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#FFFFFF', title_font=dict(size=12)),
-            yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#FFFFFF', title_font=dict(size=12))
+            xaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12)),
+            yaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12))
         )
         
         st.plotly_chart(fig_returns, use_container_width=True)
@@ -897,11 +818,11 @@ if model_choice == "Overview":
             template='plotly_dark',
             height=400,
             showlegend=True,
-            plot_bgcolor='rgba(10, 25, 41, 0.4)',
-            paper_bgcolor='rgba(10, 25, 41, 0.2)',
+            plot_bgcolor="#0f172a",
+            paper_bgcolor="#0f172a",
             font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-            xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#FFFFFF', title_font=dict(size=12)),
-            yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#FFFFFF', title_font=dict(size=12)),
+            xaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12)),
+            yaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12)),
             legend=dict(font=dict(size=11))
         )
         
@@ -984,7 +905,7 @@ if model_choice == "Overview":
     
     with col1:
         st.markdown("**Autocorrelation Function (ACF)**")
-        fig_acf, ax_acf = plt.subplots(figsize=(10, 4), facecolor='#0A1929')
+        fig_acf, ax_acf = plt.subplots(figsize=(10, 4), facecolor="#0f172a")
         ax_acf.set_facecolor('#0A1929')
         plot_acf(df['LogReturn'], lags=40, ax=ax_acf, color='#00D9FF')
         ax_acf.set_title("")
@@ -995,13 +916,13 @@ if model_choice == "Overview":
         ax_acf.spines['right'].set_visible(False)
         ax_acf.set_xlabel('Lag', color='#FFFFFF')
         ax_acf.set_ylabel('ACF', color='#FFFFFF')
-        ax_acf.grid(True, alpha=0.15, color='#0099FF')
+        ax_acf.grid(True, alpha=0.15, color="#60a5fa")
         st.pyplot(fig_acf)
         plt.close()
     
     with col2:
         st.markdown("**Partial Autocorrelation Function (PACF)**")
-        fig_pacf, ax_pacf = plt.subplots(figsize=(10, 4), facecolor='#0A1929')
+        fig_pacf, ax_pacf = plt.subplots(figsize=(10, 4), facecolor="#0f172a")
         ax_pacf.set_facecolor('#0A1929')
         plot_pacf(df['LogReturn'], lags=40, ax=ax_pacf, method='ywm', color='#00D9FF')
         ax_pacf.set_title("")
@@ -1012,7 +933,7 @@ if model_choice == "Overview":
         ax_pacf.spines['right'].set_visible(False)
         ax_pacf.set_xlabel('Lag', color='#FFFFFF')
         ax_pacf.set_ylabel('PACF', color='#FFFFFF')
-        ax_pacf.grid(True, alpha=0.15, color='#0099FF')
+        ax_pacf.grid(True, alpha=0.15, color="#60a5fa")
         st.pyplot(fig_pacf)
         plt.close()
     
@@ -1090,15 +1011,15 @@ elif model_choice == "OLS AR(1)":
                 x=model_data.index,
                 y=resid,
                 mode='lines',
-                line=dict(color='#0099FF', width=1.5),
+                line=dict(color="#60a5fa", width=1.5),
                 name='Residuals'
             ))
             fig_resid.add_hline(y=0, line_dash="dash", line_color="#B8C5D0")
             fig_resid.update_layout(height=300, showlegend=False, template='plotly_dark', 
-                                   plot_bgcolor='rgba(10, 25, 41, 0.4)', paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                                   plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
                                    font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=10),
-                                   xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)),
-                                   yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)))
+                                   xaxis=dict(gridcolor="#334155", title_font=dict(size=11)),
+                                   yaxis=dict(gridcolor="#334155", title_font=dict(size=11)))
             st.plotly_chart(fig_resid, use_container_width=True)
         
         with col2:
@@ -1111,19 +1032,19 @@ elif model_choice == "OLS AR(1)":
                 opacity=0.8
             ))
             fig_hist.update_layout(height=300, showlegend=False, template='plotly_dark',
-                                  plot_bgcolor='rgba(10, 25, 41, 0.4)', paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                                  plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
                                   font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=10),
-                                  xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)),
-                                  yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)))
+                                  xaxis=dict(gridcolor="#334155", title_font=dict(size=11)),
+                                  yaxis=dict(gridcolor="#334155", title_font=dict(size=11)))
             st.plotly_chart(fig_hist, use_container_width=True)
         
         with col3:
             st.markdown("**Q-Q Plot**")
-            fig_qq, ax_qq = plt.subplots(figsize=(5, 4), facecolor='#0A1929')
+            fig_qq, ax_qq = plt.subplots(figsize=(5, 4), facecolor="#0f172a")
             ax_qq.set_facecolor('#0A1929')
             probplot(resid, dist="norm", plot=ax_qq)
             ax_qq.set_title("")
-            ax_qq.grid(True, alpha=0.15, color='#0099FF')
+            ax_qq.grid(True, alpha=0.15, color="#60a5fa")
             ax_qq.tick_params(colors='#FFFFFF')
             ax_qq.spines['bottom'].set_color('#FFFFFF')
             ax_qq.spines['left'].set_color('#FFFFFF')
@@ -1313,11 +1234,11 @@ elif model_choice == "ARIMA":
                     hovermode='x unified',
                     template='plotly_dark',
                     height=500,
-                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    plot_bgcolor="#0f172a",
+                    paper_bgcolor="#0f172a",
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                    yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
@@ -1359,7 +1280,7 @@ elif model_choice == "ARIMA":
                     y=train_returns,
                     mode='lines',
                     name='Training Data',
-                    line=dict(color='#0099FF', width=1.5),
+                    line=dict(color="#60a5fa", width=1.5),
                     opacity=0.7
                 ))
                 
@@ -1409,11 +1330,11 @@ elif model_choice == "ARIMA":
                     hovermode='x unified',
                     template='plotly_dark',
                     height=500,
-                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    plot_bgcolor="#0f172a",
+                    paper_bgcolor="#0f172a",
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                    yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
@@ -1546,11 +1467,11 @@ elif model_choice == "GARCH(1,1)":
                 hovermode='x unified',
                 template='plotly_dark',
                 height=400,
-                plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                plot_bgcolor="#0f172a",
+                paper_bgcolor="#0f172a",
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 legend=dict(font=dict(size=11))
             )
             
@@ -1600,11 +1521,11 @@ elif model_choice == "GARCH(1,1)":
                 hovermode='x unified',
                 template='plotly_dark',
                 height=500,
-                plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                plot_bgcolor="#0f172a",
+                paper_bgcolor="#0f172a",
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 legend=dict(font=dict(size=11))
             )
             
@@ -1763,7 +1684,7 @@ elif model_choice == "Compare All":
                 y=arima_forecasts,
                 mode='lines',
                 name='ARIMA(1,0,1)',
-                line=dict(color='#0099FF', width=2, dash='dash')
+                line=dict(color="#60a5fa", width=2, dash='dash')
             ))
             
             # Naive
@@ -1786,11 +1707,11 @@ elif model_choice == "Compare All":
                 hovermode='x unified',
                 template='plotly_dark',
                 height=500,
-                plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                plot_bgcolor="#0f172a",
+                paper_bgcolor="#0f172a",
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11))
             )
             
@@ -1817,7 +1738,7 @@ elif model_choice == "Compare All":
                 fig_errors.add_trace(go.Box(
                     y=test_returns.values - arima_forecasts,
                     name='ARIMA',
-                    marker_color='#0099FF'
+                    marker_color="#60a5fa"
                 ))
                 
                 fig_errors.add_trace(go.Box(
@@ -1830,8 +1751,8 @@ elif model_choice == "Compare All":
                     yaxis_title='Forecast Error',
                     template='plotly_dark',
                     height=400,
-                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    plot_bgcolor="#0f172a",
+                    paper_bgcolor="#0f172a",
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                     xaxis=dict(title_font=dict(size=12)),
                     yaxis=dict(title_font=dict(size=12))
@@ -1855,7 +1776,7 @@ elif model_choice == "Compare All":
                     y=np.cumsum((test_returns.values - arima_forecasts)**2),
                     mode='lines',
                     name='ARIMA',
-                    line=dict(color='#0099FF', width=2.5)
+                    line=dict(color="#60a5fa", width=2.5)
                 ))
                 
                 fig_cumsum.add_trace(go.Scatter(
@@ -1870,11 +1791,11 @@ elif model_choice == "Compare All":
                     yaxis_title='Cumulative Squared Error',
                     template='plotly_dark',
                     height=400,
-                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
-                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    plot_bgcolor="#0f172a",
+                    paper_bgcolor="#0f172a",
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
-                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
+                    yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
