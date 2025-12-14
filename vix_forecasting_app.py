@@ -1089,10 +1089,14 @@ elif model_choice == "OLS AR(1)":
             ax_qq.spines['left'].set_color('#FFFFFF')
             ax_qq.spines['top'].set_color('#FFFFFF')
             ax_qq.spines['right'].set_color('#FFFFFF')
-            # Change line colors
-            for line in ax_qq.get_lines():
-                line.set_color('#E50914')
-                line.set_markersize(4)
+            # Change line colors - first line is scatter points, second is reference line
+            lines = ax_qq.get_lines()
+            if len(lines) >= 1:
+                lines[0].set_color('#E50914')  # Residual points in red
+                lines[0].set_markersize(4)
+            if len(lines) >= 2:
+                lines[1].set_color('#B3B3B3')  # Reference line in grey
+                lines[1].set_linewidth(1.5)
             st.pyplot(fig_qq)
             plt.close()
         
