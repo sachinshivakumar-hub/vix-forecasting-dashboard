@@ -368,8 +368,9 @@ st.markdown("""
         background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         border: 2px dashed #60a5fa;
         border-radius: 16px;
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 2rem;
         transition: all 0.3s ease;
+        text-align: center;
     }
     
     [data-testid="stFileUploader"]:hover {
@@ -382,27 +383,44 @@ st.markdown("""
     [data-testid="stFileUploader"] section {
         border: none !important;
         background-color: transparent !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    [data-testid="stFileUploader"] section > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
     
     [data-testid="stFileUploader"] section button {
         background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%) !important;
         color: white !important;
         border: none !important;
-        border-radius: 8px;
-        padding: 0.75rem 2rem !important;
+        border-radius: 10px;
+        padding: 0.875rem 2.5rem !important;
         font-weight: 600;
+        font-size: 0.95rem !important;
         transition: all 0.3s ease;
+        margin: 0.5rem auto !important;
+        display: block !important;
     }
     
     [data-testid="stFileUploader"] section button:hover {
         background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
         box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
-        transform: translateY(-1px);
+        transform: translateY(-2px);
     }
     
     [data-testid="stFileUploader"] small {
-        color: #cbd5e1 !important;
-        font-size: 0.9rem;
+        color: #94a3b8 !important;
+        font-size: 0.85rem !important;
+        text-align: center;
+        display: block;
+        margin-top: 0.5rem;
     }
     
     /* Upload section styling */
@@ -703,15 +721,15 @@ with st.sidebar:
     # File upload with custom styling
     st.subheader("📁 Data Upload")
     
-    # Custom upload container
+    # Custom upload container with better formatting
     st.markdown("""
-        <div style='text-align: center; padding: 0.5rem 0;'>
-            <div style='font-size: 2.5rem; margin-bottom: 0.5rem;'>📊</div>
-            <div style='color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.3rem;'>
+        <div style='text-align: center; padding: 1rem 0 0.75rem 0; margin-bottom: 0.5rem;'>
+            <div style='font-size: 3rem; margin-bottom: 0.75rem; line-height: 1;'>📊</div>
+            <div style='color: #e2e8f0; font-size: 1rem; margin-bottom: 0.5rem; font-weight: 500;'>
                 Drag & Drop your VIX CSV file
             </div>
-            <div style='color: #64748b; font-size: 0.8rem; font-style: italic;'>
-                or click browse to select
+            <div style='color: #94a3b8; font-size: 0.875rem; font-style: italic;'>
+                or use the button below to browse
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -724,8 +742,15 @@ with st.sidebar:
     )
     
     if uploaded_file:
-        st.success(f"✅ File loaded: {uploaded_file.name}")
-        st.info(f"📏 Size: {uploaded_file.size / 1024:.2f} KB")
+        st.markdown(f"""
+            <div style='background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+                        padding: 0.75rem 1rem; border-radius: 8px; margin: 0.75rem 0;
+                        text-align: center; border-left: 4px solid #065f46;'>
+                <div style='color: white; font-weight: 600;'>✅ File Successfully Loaded</div>
+                <div style='color: #d1fae5; font-size: 0.9rem; margin-top: 0.25rem;'>{uploaded_file.name}</div>
+                <div style='color: #a7f3d0; font-size: 0.85rem;'>Size: {uploaded_file.size / 1024:.2f} KB</div>
+            </div>
+        """, unsafe_allow_html=True)
     
     use_sample = st.checkbox(
         "📈 Use sample VIX data", 
