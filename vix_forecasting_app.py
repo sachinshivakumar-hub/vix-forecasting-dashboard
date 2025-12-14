@@ -383,17 +383,15 @@ st.markdown("""
     [data-testid="stFileUploader"] section {
         border: none !important;
         background-color: transparent !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        text-align: center !important;
     }
     
     [data-testid="stFileUploader"] section > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
     }
     
     [data-testid="stFileUploader"] section button {
@@ -407,6 +405,7 @@ st.markdown("""
         transition: all 0.3s ease;
         margin: 0.5rem auto !important;
         display: block !important;
+        width: auto !important;
     }
     
     [data-testid="stFileUploader"] section button:hover {
@@ -418,9 +417,21 @@ st.markdown("""
     [data-testid="stFileUploader"] small {
         color: #94a3b8 !important;
         font-size: 0.85rem !important;
-        text-align: center;
-        display: block;
-        margin-top: 0.5rem;
+        text-align: center !important;
+        display: block !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    /* Force center alignment for file uploader content */
+    [data-testid="stFileUploader"] > div,
+    [data-testid="stFileUploader"] > section,
+    [data-testid="stFileUploader"] > section > div,
+    [data-testid="stFileUploader"] label {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
     }
     
     /* Upload section styling */
