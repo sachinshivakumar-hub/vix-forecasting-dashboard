@@ -1228,7 +1228,7 @@ elif model_choice == " ARIMA":
                 y=test_returns,
                 mode='lines',
                 name='Actual Test Data',
-                line=dict(color='black', width=2)
+                line=dict(color='#B3B3B3', width=2)
             ))
             
             # Forecast
@@ -1237,7 +1237,7 @@ elif model_choice == " ARIMA":
                 y=forecast_mean,
                 mode='lines',
                 name='ARIMA Forecast',
-                line=dict(color='#FFFFFF', width=2)
+                line=dict(color='#E50914', width=2)
             ))
             
             # Confidence intervals
@@ -1436,7 +1436,7 @@ elif model_choice == " GARCH(1,1)":
                 y=cond_vol[-hist_window:],
                 mode='lines',
                 name='Historical Volatility',
-                line=dict(color='steelblue', width=1.5)
+                line=dict(color='#808080', width=1.5)
             ))
             
             # Forecast
@@ -1445,7 +1445,7 @@ elif model_choice == " GARCH(1,1)":
                 y=vol_forecast,
                 mode='lines+markers',
                 name='Volatility Forecast',
-                line=dict(color='#FFFFFF', width=2),
+                line=dict(color='#E50914', width=2),
                 marker=dict(size=6)
             ))
             
@@ -1604,7 +1604,7 @@ elif model_choice == " Compare All":
                 y=test_returns,
                 mode='lines',
                 name='Actual',
-                line=dict(color='black', width=2)
+                line=dict(color='#B3B3B3', width=2)
             ))
             
             # OLS
@@ -1622,7 +1622,7 @@ elif model_choice == " Compare All":
                 y=arima_forecasts,
                 mode='lines',
                 name='ARIMA(1,0,1)',
-                line=dict(color='#FFFFFF', width=1.5, dash='dash')
+                line=dict(color='#808080', width=1.5, dash='dash')
             ))
             
             # Naive
@@ -1714,14 +1714,14 @@ elif model_choice == " Compare All":
                     y=np.cumsum((test_returns.values - arima_forecasts)**2),
                     mode='lines',
                     name='ARIMA',
-                    line=dict(color='#FFFFFF', width=2)
+                    line=dict(color='#B3B3B3', width=2)
                 ))
                 
                 fig_cumsum.add_trace(go.Scatter(
                     y=np.cumsum((test_returns.values - naive_forecast)**2),
                     mode='lines',
                     name='Naive',
-                    line=dict(color='red', width=2)
+                    line=dict(color='#808080', width=2)
                 ))
                 
                 fig_cumsum.update_layout(
