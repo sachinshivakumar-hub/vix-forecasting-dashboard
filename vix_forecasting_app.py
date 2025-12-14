@@ -1,6 +1,6 @@
 """
 ═══════════════════════════════════════════════════════════════════════════════
-🎯 VIX VOLATILITY FORECASTING APPLICATION
+VIX VOLATILITY FORECASTING APPLICATION
 ═══════════════════════════════════════════════════════════════════════════════
 
 FIN41660 Financial Econometrics - University College Dublin
@@ -44,190 +44,321 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(
     page_title="VIX Forecasting Dashboard",
-    page_icon="📈",
+    page_icon="�",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for professional dark theme styling
+# Netflix-inspired theme with elegant red, black, and white palette
 st.markdown("""
 <style>
-    /* Full dark theme background */
-    * {
-        color: #e2e8f0;
+    /* Netflix color palette */
+    :root {
+        --netflix-red: #E50914;
+        --netflix-dark: #141414;
+        --netflix-black: #000000;
+        --netflix-white: #FFFFFF;
+        --netflix-gray: #808080;
+        --netflix-light-gray: #B3B3B3;
     }
     
+    /* Global dark background */
     .stApp {
-        background-color: #0f172a;
+        background-color: #141414;
     }
     
     .stApp > header {
-        background-color: #0f172a;
+        background-color: #000000;
     }
     
+    /* Sidebar styling */
     .stSidebar {
-        background-color: #1e293b;
+        background-color: #000000;
+        border-right: 1px solid #2a2a2a;
     }
     
     .stSidebar > div {
-        background-color: #1e293b;
+        background-color: #000000;
     }
     
     /* Main container */
     .main {
-        background-color: #0f172a;
+        background-color: #141414;
     }
     
-    /* Headers */
-    h1, h2, h3, h4, h5, h6 {
-        color: #f1f5f9 !important;
+    /* Headers with Netflix red accent */
+    h1 {
+        color: #FFFFFF !important;
+        font-weight: 700;
+        letter-spacing: -0.5px;
     }
     
+    h2 {
+        color: #E50914 !important;
+        font-weight: 600;
+        border-bottom: 2px solid #E50914;
+        padding-bottom: 10px;
+        margin-top: 2rem;
+    }
+    
+    h3, h4, h5, h6 {
+        color: #FFFFFF !important;
+        font-weight: 500;
+    }
+    
+    /* Text styling */
     .stMarkdown {
-        color: #e2e8f0;
+        color: #B3B3B3;
     }
     
-    /* Main header gradient */
+    p, li, span {
+        color: #B3B3B3 !important;
+    }
+    
+    /* Main header */
     .main-header {
-        font-size: 3rem;
-        font-weight: bold;
-        background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #E50914;
         text-align: center;
-        padding: 1rem 0;
+        padding: 2rem 0 0.5rem 0;
+        letter-spacing: -1px;
+        text-transform: uppercase;
     }
     
     .sub-header {
-        font-size: 1.2rem;
-        color: #cbd5e1;
+        font-size: 1.1rem;
+        color: #B3B3B3;
         text-align: center;
         margin-bottom: 2rem;
+        font-weight: 400;
     }
     
-    /* Metric cards */
-    .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
-        border-radius: 10px;
-        color: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-    }
-    
-    /* Alert boxes */
-    .stAlert {
-        background-color: #1e293b !important;
-        border-left: 4px solid #60a5fa !important;
-        color: #e2e8f0 !important;
-    }
-    
-    .stAlert p {
-        color: #e2e8f0 !important;
-    }
-    
-    /* Metrics */
+    /* Metric cards - Netflix red accent */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
-        font-weight: bold;
-        color: #60a5fa !important;
+        font-weight: 700;
+        color: #E50914 !important;
     }
     
     [data-testid="stMetricLabel"] {
-        color: #cbd5e1 !important;
+        color: #B3B3B3 !important;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 1px;
     }
     
     [data-testid="stMetricDelta"] {
-        color: #94a3b8 !important;
+        color: #808080 !important;
     }
     
-    /* Dataframes */
+    /* Data tables */
     .stDataFrame {
-        background-color: #1e293b !important;
+        background-color: #000000 !important;
     }
     
     .stDataFrame th {
-        background-color: #334155 !important;
-        color: #e2e8f0 !important;
+        background-color: #E50914 !important;
+        color: #FFFFFF !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
     }
     
     .stDataFrame td {
-        background-color: #1e293b !important;
-        color: #e2e8f0 !important;
-        border-color: #334155 !important;
+        background-color: #1a1a1a !important;
+        color: #B3B3B3 !important;
+        border-color: #2a2a2a !important;
     }
     
-    /* Buttons */
+    .stDataFrame tr:hover td {
+        background-color: #252525 !important;
+    }
+    
+    /* Buttons - Netflix style */
     .stButton > button {
-        background-color: #1e293b !important;
-        color: #e2e8f0 !important;
-        border: 1px solid #334155 !important;
+        background-color: #E50914 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.75rem 2rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
     }
     
     .stButton > button:hover {
-        background-color: #334155 !important;
-        color: #60a5fa !important;
+        background-color: #F40612 !important;
+        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+        transform: translateY(-2px);
     }
     
     /* Radio buttons and checkboxes */
-    .stRadio > label {
-        color: #e2e8f0 !important;
+    .stRadio > label, .stCheckbox > label {
+        color: #B3B3B3 !important;
+        font-weight: 500;
     }
     
-    .stCheckbox > label {
-        color: #e2e8f0 !important;
+    .stRadio > div {
+        background-color: transparent !important;
     }
     
     /* Input fields */
     .stTextInput > div > div > input {
-        background-color: #1e293b !important;
-        color: #e2e8f0 !important;
-        border-color: #334155 !important;
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border: 1px solid #2a2a2a !important;
+        border-radius: 4px;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #E50914 !important;
+        box-shadow: 0 0 0 1px #E50914 !important;
+    }
+    
+    /* Sliders */
+    .stSlider > div > div > div {
+        background-color: #E50914 !important;
     }
     
     .stSlider > div > div {
-        color: #e2e8f0 !important;
+        color: #B3B3B3 !important;
     }
     
     /* Code blocks */
     .stCode {
-        background-color: #1e293b !important;
-        color: #60a5fa !important;
+        background-color: #000000 !important;
+        color: #E50914 !important;
+        border: 1px solid #2a2a2a;
     }
     
     code {
-        color: #60a5fa !important;
-        background-color: #1e293b !important;
-        padding: 2px 6px;
-        border-radius: 3px;
+        color: #E50914 !important;
+        background-color: #1a1a1a !important;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
     }
     
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: #1e293b !important;
-        color: #e2e8f0 !important;
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border: 1px solid #2a2a2a;
+        border-radius: 4px;
+        font-weight: 500;
     }
     
     .streamlit-expanderHeader:hover {
-        background-color: #334155 !important;
+        background-color: #252525 !important;
+        border-color: #E50914 !important;
     }
     
-    /* Table styling */
-    table {
-        color: #e2e8f0 !important;
+    /* Alert boxes */
+    .stAlert {
+        background-color: #1a1a1a !important;
+        border-left: 4px solid #E50914 !important;
+        color: #B3B3B3 !important;
+    }
+    
+    /* Info boxes */
+    div[data-baseweb="notification"] {
+        background-color: #1a1a1a !important;
+        border-left: 4px solid #E50914 !important;
+    }
+    
+    /* Success boxes */
+    .stSuccess {
+        background-color: #1a1a1a !important;
+        border-left: 4px solid #46d369 !important;
+    }
+    
+    /* Warning boxes */
+    .stWarning {
+        background-color: #1a1a1a !important;
+        border-left: 4px solid #ffa500 !important;
+    }
+    
+    /* Error boxes */
+    .stError {
+        background-color: #1a1a1a !important;
+        border-left: 4px solid #E50914 !important;
     }
     
     /* Links */
     a {
-        color: #60a5fa !important;
+        color: #E50914 !important;
+        text-decoration: none;
+        font-weight: 500;
     }
     
     a:hover {
-        color: #a78bfa !important;
+        color: #F40612 !important;
+        text-decoration: underline;
     }
     
     /* Dividers */
     hr {
-        border-color: #334155 !important;
+        border-color: #2a2a2a !important;
+        margin: 2rem 0;
+    }
+    
+    /* File uploader */
+    [data-testid="stFileUploader"] {
+        background-color: #1a1a1a;
+        border: 2px dashed #2a2a2a;
+        border-radius: 8px;
+    }
+    
+    [data-testid="stFileUploader"]:hover {
+        border-color: #E50914;
+    }
+    
+    /* Selectbox */
+    .stSelectbox > div > div {
+        background-color: #1a1a1a !important;
+        border-color: #2a2a2a !important;
+        color: #FFFFFF !important;
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background-color: #000000;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background-color: #1a1a1a;
+        color: #B3B3B3;
+        border-radius: 4px 4px 0 0;
+        font-weight: 500;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #E50914 !important;
+        color: #FFFFFF !important;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #000000;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #E50914;
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #F40612;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -372,10 +503,10 @@ def diebold_mariano_test(actual, forecast1, forecast2):
 
 with st.sidebar:
     st.markdown("---")
-    st.header("⚙️ Configuration")
+    st.header("Configuration")
     
     # File upload
-    st.subheader("📁 Data Upload")
+    st.subheader("Data Upload")
     uploaded_file = st.file_uploader(
         "Upload VIX CSV file",
         type=['csv'],
@@ -387,10 +518,10 @@ with st.sidebar:
     st.markdown("---")
     
     # Model selection
-    st.subheader("🎯 Model Selection")
+    st.subheader("Model Selection")
     model_choice = st.radio(
         "Choose forecasting model:",
-        ["📊 Overview", "📈 OLS AR(1)", "🔄 ARIMA", "📉 GARCH(1,1)", "🏆 Compare All"],
+        ["Overview", "OLS AR(1)", "ARIMA", "GARCH(1,1)", "Compare All"],
         index=0
     )
     
@@ -398,7 +529,7 @@ with st.sidebar:
     
     # Model parameters
     if "ARIMA" in model_choice:
-        st.subheader("🔧 ARIMA Parameters")
+        st.subheader("ARIMA Parameters")
         p_order = st.slider("AR order (p)", 0, 5, 1, help="Autoregressive order")
         d_order = st.slider("Differencing (d)", 0, 2, 0, help="Degree of differencing")
         q_order = st.slider("MA order (q)", 0, 5, 1, help="Moving average order")
@@ -407,7 +538,7 @@ with st.sidebar:
     st.markdown("---")
     
     # Analysis parameters
-    st.subheader("📊 Analysis Settings")
+    st.subheader("Analysis Settings")
     train_size = st.slider(
         "Training set size (%)",
         50, 95, 80,
@@ -423,7 +554,7 @@ with st.sidebar:
     st.markdown("---")
     
     # About section
-    with st.expander("ℹ️ About"):
+    with st.expander("About"):
         st.markdown("""
         **VIX Forecasting App**
         
@@ -445,9 +576,9 @@ with st.sidebar:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Header
-st.markdown('<p class="main-header">📈 VIX Volatility Forecasting Dashboard</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-header">VIX Volatility Forecasting</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Advanced Time Series Analysis | FIN41660 Financial Econometrics</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #cbd5e1; font-size: 14px; margin-top: -10px;">Econometrics Group: Karthik PSB, Sachin Shivakumar, Pavan, Alexander Pokhilo</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #808080; font-size: 13px; margin-top: -10px;">Karthik PSB • Sachin Shivakumar • Pavan • Alexander Pokhilo</p>', unsafe_allow_html=True)
 
 # Load data
 if uploaded_file:
@@ -457,10 +588,10 @@ elif use_sample:
     try:
         df = load_data("VIX 10yr.csv")
     except:
-        st.error("⚠️ No sample data found. Please upload your VIX data file.")
+        st.error("No sample data found. Please upload your VIX data file.")
         st.stop()
 else:
-    st.info("👆 Please upload a VIX data file or use sample data from the sidebar.")
+    st.info("Please upload a VIX data file or use sample data from the sidebar.")
     st.stop()
 
 if df is None:
@@ -474,15 +605,15 @@ if 'df' not in st.session_state:
 # PAGE: OVERVIEW
 # ═══════════════════════════════════════════════════════════════════════════════
 
-if model_choice == "📊 Overview":
-    st.header("📊 Data Overview & Exploratory Analysis")
+if model_choice == "Overview":
+    st.header("Data Overview & Exploratory Analysis")
     
     # Key metrics row
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         st.metric(
-            "📅 Observations",
+            "OBSERVATIONS",
             f"{len(df):,}",
             help="Total number of data points"
         )
@@ -491,7 +622,7 @@ if model_choice == "📊 Overview":
         start_date = df['Date'].min().strftime('%b %Y')
         end_date = df['Date'].max().strftime('%b %Y')
         st.metric(
-            "📆 Date Range",
+            "DATE RANGE",
             f"{start_date} - {end_date}",
             delta=f"{(df['Date'].max() - df['Date'].min()).days} days",
             help="Full time period of the dataset"
@@ -499,14 +630,14 @@ if model_choice == "📊 Overview":
     
     with col3:
         st.metric(
-            "📊 Mean VIX",
+            "MEAN VIX",
             f"{df['Price'].mean():.2f}",
             help="Average VIX level"
         )
     
     with col4:
         st.metric(
-            "📈 Max VIX",
+            "MAX VIX",
             f"{df['Price'].max():.2f}",
             delta=f"{df['Price'].max() - df['Price'].mean():.2f}",
             help="Maximum VIX level"
@@ -514,7 +645,7 @@ if model_choice == "📊 Overview":
     
     with col5:
         st.metric(
-            "📉 Min VIX",
+            "MIN VIX",
             f"{df['Price'].min():.2f}",
             delta=f"{df['Price'].min() - df['Price'].mean():.2f}",
             delta_color="inverse",
@@ -524,12 +655,12 @@ if model_choice == "📊 Overview":
     st.markdown("---")
     
     # Date range info box (centered)
-    st.info(f"📅 **Data Coverage**: {df['Date'].min().strftime('%B %d, %Y')} to {df['Date'].max().strftime('%B %d, %Y')} • **{len(df):,} trading days** • **{(df['Date'].max() - df['Date'].min()).days / 365.25:.1f} years**")
+    st.info(f"**Data Coverage**: {df['Date'].min().strftime('%B %d, %Y')} to {df['Date'].max().strftime('%B %d, %Y')} • **{len(df):,} trading days** • **{(df['Date'].max() - df['Date'].min()).days / 365.25:.1f} years**")
     
     st.markdown("---")
     
     # Interactive VIX price chart
-    st.subheader("📈 VIX Index Historical Prices")
+    st.subheader("VIX Index Historical Prices")
     
     fig = go.Figure()
     
@@ -564,7 +695,7 @@ if model_choice == "📊 Overview":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📊 Daily Log Returns")
+        st.subheader("Daily Log Returns")
         
         fig_returns = go.Figure()
         
@@ -594,7 +725,7 @@ if model_choice == "📊 Overview":
         st.plotly_chart(fig_returns, use_container_width=True)
     
     with col2:
-        st.subheader("📊 Return Distribution")
+        st.subheader("Return Distribution")
         
         fig_hist = go.Figure()
         
@@ -638,7 +769,7 @@ if model_choice == "📊 Overview":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📊 Descriptive Statistics")
+        st.subheader("Descriptive Statistics")
         
         stats_dict = calculate_statistics(df['LogReturn'])
         
@@ -662,12 +793,12 @@ if model_choice == "📊 Overview":
         
         # Jarque-Bera test
         if stats_dict['jb_pvalue'] < 0.05:
-            st.warning(f"🔔 **Jarque-Bera Test**: Reject normality (p = {stats_dict['jb_pvalue']:.6f})")
+            st.warning(f"**Jarque-Bera Test**: Reject normality (p = {stats_dict['jb_pvalue']:.6f})")
         else:
-            st.success(f"✅ **Jarque-Bera Test**: Normal distribution (p = {stats_dict['jb_pvalue']:.6f})")
+            st.success(f"**Jarque-Bera Test**: Normal distribution (p = {stats_dict['jb_pvalue']:.6f})")
     
     with col2:
-        st.subheader("🔬 Stationarity Tests")
+        st.subheader("Stationarity Tests")
         
         test_results = stationarity_tests(df['LogReturn'])
         
@@ -677,9 +808,9 @@ if model_choice == "📊 Overview":
         st.markdown(f"- p-value: `{test_results['adf_pvalue']:.6f}`")
         
         if test_results['adf_pvalue'] < 0.05:
-            st.success("✅ Series is **stationary** (reject unit root)")
+            st.success("Series is **stationary** (reject unit root)")
         else:
-            st.error("❌ Series may be **non-stationary**")
+            st.error("Series may be **non-stationary**")
         
         st.markdown("---")
         
@@ -689,21 +820,21 @@ if model_choice == "📊 Overview":
         st.markdown(f"- p-value: `{test_results['kpss_pvalue']:.6f}`")
         
         if test_results['kpss_pvalue'] > 0.05:
-            st.success("✅ Series is **stationary**")
+            st.success("Series is **stationary**")
         else:
-            st.error("❌ Series may be **non-stationary**")
+            st.error("Series may be **non-stationary**")
         
         st.markdown("---")
         
         # Combined interpretation
         if test_results['adf_pvalue'] < 0.05 and test_results['kpss_pvalue'] > 0.05:
-            st.success("🎯 **Both tests confirm**: Series is stationary → ARIMA(p,0,q) appropriate")
+            st.success("**Both tests confirm**: Series is stationary → ARIMA(p,0,q) appropriate")
         else:
-            st.warning("⚠️ Mixed results - examine ACF/PACF plots")
+            st.warning("Mixed results - examine ACF/PACF plots")
     
     # ACF and PACF plots
     st.markdown("---")
-    st.subheader("📈 Autocorrelation Analysis")
+    st.subheader("Autocorrelation Analysis")
     
     col1, col2 = st.columns(2)
     
@@ -723,17 +854,17 @@ if model_choice == "📊 Overview":
         st.pyplot(fig_pacf)
         plt.close()
     
-    st.info("💡 **Tip**: Use ACF and PACF to identify appropriate ARIMA orders (p, q)")
+    st.info("Tip: Use ACF and PACF to identify appropriate ARIMA orders (p, q)")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE: OLS MODEL
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == "📈 OLS AR(1)":
-    st.header("📈 OLS AR(1) Model")
+elif model_choice == "OLS AR(1)":
+    st.header("OLS AR(1) Model")
     st.markdown("Simple autoregressive model: $r_t = \\alpha + \\phi r_{t-1} + \\varepsilon_t$")
     
-    with st.spinner("🔄 Fitting OLS AR(1) model..."):
+    with st.spinner("Fitting OLS AR(1) model..."):
         # Split data
         split_idx = int(len(df) * train_size / 100)
         train_df = df.iloc[:split_idx].copy()
@@ -746,7 +877,7 @@ elif model_choice == "📈 OLS AR(1)":
         col1, col2 = st.columns([2, 1])
         
         with col1:
-            st.subheader("📊 Model Estimation Results")
+            st.subheader("Model Estimation Results")
             
             # Coefficients table
             coef_df = pd.DataFrame({
@@ -767,12 +898,12 @@ elif model_choice == "📈 OLS AR(1)":
             if abs(ar1) < 0.1 and ols_model.pvalues['Lag1'] > 0.05:
                 st.info("🔍 Weak autocorrelation - VIX returns are approximately white noise in the mean")
             elif ar1 > 0 and ols_model.pvalues['Lag1'] < 0.05:
-                st.success(f"📈 Significant positive persistence (φ = {ar1:.4f}) - momentum in returns")
+                st.success(f"Significant positive persistence (φ = {ar1:.4f}) - momentum in returns")
             elif ar1 < 0 and ols_model.pvalues['Lag1'] < 0.05:
-                st.success(f"📉 Significant mean reversion (φ = {ar1:.4f})")
+                st.success(f"Significant mean reversion (φ = {ar1:.4f})")
         
         with col2:
-            st.subheader("📊 Model Quality")
+            st.subheader("Model Quality")
             
             st.metric("R-squared", f"{ols_model.rsquared:.4f}")
             st.metric("Adj. R-squared", f"{ols_model.rsquared_adj:.4f}")
@@ -784,7 +915,7 @@ elif model_choice == "📈 OLS AR(1)":
         st.markdown("---")
         
         # Residual diagnostics
-        st.subheader("🔬 Residual Diagnostics")
+        st.subheader("Residual Diagnostics")
         
         resid = ols_model.resid
         
@@ -839,46 +970,46 @@ elif model_choice == "📈 OLS AR(1)":
             dw = durbin_watson(resid)
             st.markdown(f"**Durbin-Watson**: `{dw:.3f}`")
             if 1.5 < dw < 2.5:
-                st.success("✅ No significant autocorrelation")
+                st.success("No significant autocorrelation")
             else:
-                st.warning("⚠️ Possible autocorrelation")
+                st.warning("Possible autocorrelation")
             
             # Breusch-Pagan
             X = sm.add_constant(model_data['Lag1'])
             bp_test = het_breuschpagan(resid, X)
             st.markdown(f"**Breusch-Pagan** (heteroskedasticity): `p = {bp_test[1]:.4f}`")
             if bp_test[1] < 0.05:
-                st.warning("⚠️ Heteroskedasticity detected → GARCH model appropriate")
+                st.warning("Heteroskedasticity detected → GARCH model appropriate")
             else:
-                st.success("✅ Homoskedasticity")
+                st.success("Homoskedasticity")
         
         with col2:
             # Ljung-Box
             lb_test = acorr_ljungbox(resid, lags=[10], return_df=True)
             st.markdown(f"**Ljung-Box** (lag 10): `p = {lb_test['lb_pvalue'].iloc[0]:.4f}`")
             if lb_test['lb_pvalue'].iloc[0] > 0.05:
-                st.success("✅ No residual autocorrelation")
+                st.success("No residual autocorrelation")
             else:
-                st.warning("⚠️ Residual autocorrelation detected")
+                st.warning("Residual autocorrelation detected")
             
             # Normality
             from statsmodels.stats.diagnostic import normal_ad
             ad_stat, ad_p = normal_ad(resid)
             st.markdown(f"**Anderson-Darling** (normality): `p = {ad_p:.4f}`")
             if ad_p < 0.05:
-                st.warning("⚠️ Non-normal residuals (fat tails)")
+                st.warning("Non-normal residuals (fat tails)")
             else:
-                st.success("✅ Normal residuals")
+                st.success("Normal residuals")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE: ARIMA MODEL
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == "🔄 ARIMA":
-    st.header(f"🔄 ARIMA{arima_order} Model")
+elif model_choice == " ARIMA":
+    st.header(f"ARIMA{arima_order} Model")
     st.markdown(f"Box-Jenkins model with order (p={p_order}, d={d_order}, q={q_order})")
     
-    with st.spinner(f"🔄 Fitting ARIMA{arima_order} model..."):
+    with st.spinner(f"Fitting ARIMA{arima_order} model..."):
         # Split data
         split_idx = int(len(df) * train_size / 100)
         train_returns = df['LogReturn'].iloc[:split_idx]
@@ -892,7 +1023,7 @@ elif model_choice == "🔄 ARIMA":
             col1, col2 = st.columns([2, 1])
             
             with col1:
-                st.subheader("📊 Model Estimation Results")
+                st.subheader("Model Estimation Results")
                 
                 # Parameters table
                 params_df = pd.DataFrame({
@@ -913,7 +1044,7 @@ elif model_choice == "🔄 ARIMA":
                 st.caption("Significance codes: *** p<0.01, ** p<0.05, * p<0.1")
             
             with col2:
-                st.subheader("📊 Model Information")
+                st.subheader("Model Information")
                 
                 st.metric("Log-Likelihood", f"{arima_result.llf:.2f}")
                 st.metric("AIC", f"{arima_result.aic:.2f}")
@@ -924,7 +1055,7 @@ elif model_choice == "🔄 ARIMA":
             st.markdown("---")
             
             # Forecasting
-            st.subheader("🔮 Forecasting")
+            st.subheader("Forecasting")
             
             # Generate forecasts
             forecast_obj = arima_result.get_forecast(steps=len(test_returns))
@@ -1008,7 +1139,7 @@ elif model_choice == "🔄 ARIMA":
             st.markdown("---")
             
             # Residual diagnostics
-            st.subheader("🔬 Residual Diagnostics")
+            st.subheader("Residual Diagnostics")
             
             residuals = arima_result.resid
             
@@ -1030,23 +1161,23 @@ elif model_choice == "🔄 ARIMA":
                 st.dataframe(lb_test[['lb_stat', 'lb_pvalue']], use_container_width=True)
                 
                 if (lb_test['lb_pvalue'] > 0.05).all():
-                    st.success("✅ No significant residual autocorrelation")
+                    st.success("No significant residual autocorrelation")
                 else:
-                    st.warning("⚠️ Some residual autocorrelation detected")
+                    st.warning("Some residual autocorrelation detected")
         
         except Exception as e:
-            st.error(f"❌ Error fitting ARIMA model: {str(e)}")
-            st.info("💡 Try adjusting the model order or check your data")
+            st.error(f"Error fitting ARIMA model: {str(e)}")
+            st.info("Try adjusting the model order or check your data")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE: GARCH MODEL
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == "📉 GARCH(1,1)":
-    st.header("📉 GARCH(1,1) Volatility Model")
+elif model_choice == " GARCH(1,1)":
+    st.header("GARCH(1,1) Volatility Model")
     st.markdown("Volatility clustering model: $\\sigma_t^2 = \\omega + \\alpha \\varepsilon_{t-1}^2 + \\beta \\sigma_{t-1}^2$")
     
-    with st.spinner("🔄 Fitting GARCH(1,1) model with Student-t errors..."):
+    with st.spinner("Fitting GARCH(1,1) model with Student-t errors..."):
         # Split data
         split_idx = int(len(df) * train_size / 100)
         train_returns = df['LogReturn'].iloc[:split_idx]
@@ -1059,7 +1190,7 @@ elif model_choice == "📉 GARCH(1,1)":
             col1, col2 = st.columns([2, 1])
             
             with col1:
-                st.subheader("📊 Model Parameters")
+                st.subheader("Model Parameters")
                 
                 params_df = pd.DataFrame({
                     'Parameter': garch_result.params.index,
@@ -1084,14 +1215,14 @@ elif model_choice == "📉 GARCH(1,1)":
                 st.markdown(f"**Volatility Persistence (α + β)**: `{persistence:.4f}`")
                 
                 if persistence > 0.95:
-                    st.warning("🔔 Very high persistence - volatility shocks are highly persistent")
+                    st.warning("Very high persistence - volatility shocks are highly persistent")
                 elif persistence > 0.85:
-                    st.info("📊 High persistence - typical for financial volatility")
+                    st.info("High persistence - typical for financial volatility")
                 else:
-                    st.success("✅ Moderate persistence")
+                    st.success("Moderate persistence")
             
             with col2:
-                st.subheader("📊 Model Quality")
+                st.subheader("Model Quality")
                 
                 st.metric("Log-Likelihood", f"{garch_result.loglikelihood:.2f}")
                 st.metric("AIC", f"{garch_result.aic:.2f}")
@@ -1107,7 +1238,7 @@ elif model_choice == "📉 GARCH(1,1)":
             st.markdown("---")
             
             # Conditional volatility
-            st.subheader("📈 Conditional Volatility")
+            st.subheader("Conditional Volatility")
             
             cond_vol = garch_result.conditional_volatility
             
@@ -1139,7 +1270,7 @@ elif model_choice == "📉 GARCH(1,1)":
             st.plotly_chart(fig, use_container_width=True)
             
             # Volatility forecast
-            st.subheader("🔮 Volatility Forecast")
+            st.subheader("Volatility Forecast")
             
             garch_forecast = garch_result.forecast(horizon=forecast_horizon, reindex=False)
             var_forecast = garch_forecast.variance.values[-1, :]
@@ -1200,18 +1331,18 @@ elif model_choice == "📉 GARCH(1,1)":
                 st.dataframe(forecast_df, use_container_width=True, hide_index=True)
         
         except Exception as e:
-            st.error(f"❌ Error fitting GARCH model: {str(e)}")
-            st.info("💡 GARCH models require sufficient data and may fail with extreme values")
+            st.error(f"Error fitting GARCH model: {str(e)}")
+            st.info("GARCH models require sufficient data and may fail with extreme values")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE: MODEL COMPARISON
 # ═══════════════════════════════════════════════════════════════════════════════
 
-elif model_choice == "🏆 Compare All":
-    st.header("🏆 Model Comparison Dashboard")
+elif model_choice == " Compare All":
+    st.header("Model Comparison Dashboard")
     st.markdown("Comprehensive comparison of OLS, ARIMA, and GARCH models")
     
-    with st.spinner("🔄 Fitting all models and generating comparisons..."):
+    with st.spinner("Fitting all models and generating comparisons..."):
         # Split data
         split_idx = int(len(df) * train_size / 100)
         train_df = df.iloc[:split_idx].copy()
@@ -1254,7 +1385,7 @@ elif model_choice == "🏆 Compare All":
             naive_metrics = calculate_metrics(test_returns.values, naive_forecast)
             
             # Comparison table
-            st.subheader("📊 Forecast Accuracy Comparison")
+            st.subheader("Forecast Accuracy Comparison")
             
             comparison_df = pd.DataFrame({
                 'Model': ['Naive (Benchmark)', 'OLS AR(1)', 'ARIMA(1,0,1)'],
@@ -1282,13 +1413,13 @@ elif model_choice == "🏆 Compare All":
             best_by_rmse = comparison_df.loc[comparison_df['RMSE'].idxmin(), 'Model']
             
             col1, col2 = st.columns(2)
-            col1.success(f"🏆 **Best by MAE**: {best_by_mae}")
-            col2.success(f"🏆 **Best by RMSE**: {best_by_rmse}")
+            col1.success(f" **Best by MAE**: {best_by_mae}")
+            col2.success(f" **Best by RMSE**: {best_by_rmse}")
             
             st.markdown("---")
             
             # Diebold-Mariano tests
-            st.subheader("🔬 Statistical Comparison (Diebold-Mariano Test)")
+            st.subheader("Statistical Comparison (Diebold-Mariano Test)")
             
             dm_arima_ols, p_arima_ols = diebold_mariano_test(test_returns.values, arima_forecasts, ols_forecasts)
             dm_arima_naive, p_arima_naive = diebold_mariano_test(test_returns.values, arima_forecasts, naive_forecast)
@@ -1308,12 +1439,12 @@ elif model_choice == "🏆 Compare All":
             
             st.dataframe(dm_df, use_container_width=True, hide_index=True)
             
-            st.info("💡 DM < 0: First model is better | DM > 0: Second model is better | Significant if p < 0.05")
+            st.info("DM < 0: First model is better | DM > 0: Second model is better | Significant if p < 0.05")
             
             st.markdown("---")
             
             # Forecast comparison plot
-            st.subheader("📈 Forecast Comparison Plot")
+            st.subheader("Forecast Comparison Plot")
             
             fig = go.Figure()
             
@@ -1374,7 +1505,7 @@ elif model_choice == "🏆 Compare All":
             st.markdown("---")
             
             # Forecast errors
-            st.subheader("📊 Forecast Error Analysis")
+            st.subheader("Forecast Error Analysis")
             
             col1, col2 = st.columns(2)
             
@@ -1453,7 +1584,7 @@ elif model_choice == "🏆 Compare All":
             st.markdown("---")
             
             # Information criteria comparison
-            st.subheader("📊 Model Selection Criteria")
+            st.subheader("Model Selection Criteria")
             
             ic_df = pd.DataFrame({
                 'Model': ['OLS AR(1)', 'ARIMA(1,0,1)'],
@@ -1464,14 +1595,14 @@ elif model_choice == "🏆 Compare All":
             
             st.dataframe(ic_df, use_container_width=True, hide_index=True)
             
-            st.info("💡 Lower AIC/BIC values indicate better model fit penalized for complexity")
+            st.info("Lower AIC/BIC values indicate better model fit penalized for complexity")
             
             # Try GARCH
             try:
                 garch_result = fit_garch_model(train_df)
                 
                 st.markdown("---")
-                st.subheader("📉 GARCH Model Information")
+                st.subheader("GARCH Model Information")
                 
                 col1, col2, col3 = st.columns(3)
                 
@@ -1485,13 +1616,13 @@ elif model_choice == "🏆 Compare All":
                     persistence = garch_result.params['alpha[1]'] + garch_result.params['beta[1]']
                     st.metric("Persistence (α+β)", f"{persistence:.4f}")
                 
-                st.success("✅ GARCH model focuses on volatility forecasting (different objective from mean models)")
+                st.success("GARCH model focuses on volatility forecasting (different objective from mean models)")
                 
             except:
-                st.warning("⚠️ GARCH model could not be fitted")
+                st.warning("GARCH model could not be fitted")
         
         except Exception as e:
-            st.error(f"❌ Error in model comparison: {str(e)}")
+            st.error(f"Error in model comparison: {str(e)}")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # FOOTER
