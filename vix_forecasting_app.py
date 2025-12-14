@@ -110,36 +110,35 @@ st.markdown("""
     h1 {
         font-weight: 800;
         font-size: 2.8rem !important;
+        margin-bottom: 1.5rem;
     }
     
     h2 {
         font-weight: 700;
         font-size: 1.8rem;
         border-bottom: 3px solid #60a5fa;
-        padding-bottom: 40px;
-        margin-top: 3rem;
-        margin-bottom: 3.5rem;
+        padding-bottom: 1rem;
+        margin-top: 2.5rem;
+        margin-bottom: 2rem;
     }
     
     h3 {
         font-weight: 600;
         font-size: 1.3rem;
         border-left: 5px solid #60a5fa;
-        padding-left: 80px !important;
-        margin-left: 25px;
-        margin-bottom: 3rem;
-        margin-top: 2rem;
+        padding-left: 1.5rem !important;
+        margin-left: 0;
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
     }
     
     h4, h5, h6 {
         font-weight: 600;
         color: #FFFFFF !important;
+        margin-bottom: 1rem;
     }
     
-    /* Add spacing for any element with left border */
-    [style*="border-left"] {
-        padding-left: 25px !important;
-    }
+    /* Remove generic left border padding rule */
     
     .stMarkdown {
         color: #FFFFFF;
@@ -199,9 +198,7 @@ st.markdown("""
         background-color: #1e293b !important;
         border-left: 4px solid #60a5fa !important;
         color: #FFFFFF !important;
-        padding-left: 25px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
+        padding: 1rem 1rem 1rem 1.5rem !important;
     }
     
     .stAlert p {
@@ -213,7 +210,6 @@ st.markdown("""
         background-color: #1e293b !important;
         border: 2px solid #60a5fa !important;
         border-radius: 8px;
-        padding: 15px !important;
     }
     
     .stDataFrame th {
@@ -222,14 +218,14 @@ st.markdown("""
         font-weight: 700;
         text-transform: uppercase;
         font-size: 0.85rem;
-        padding: 14px 20px !important;
+        padding: 0.875rem 1rem !important;
     }
     
     .stDataFrame td {
         background-color: #1e293b !important;
         color: #FFFFFF !important;
         border-color: #334155 !important;
-        padding: 12px 20px !important;
+        padding: 0.75rem 1rem !important;
         font-size: 1rem;
     }
     
@@ -316,7 +312,7 @@ st.markdown("""
         border: 2px solid #334155;
         border-radius: 8px;
         font-weight: 600;
-        padding: 15px 20px !important;
+        padding: 1rem 1.25rem !important;
     }
     
     .streamlit-expanderHeader:hover {
@@ -328,33 +324,25 @@ st.markdown("""
     div[data-baseweb="notification"] {
         background-color: #1e293b !important;
         border-left: 5px solid #60a5fa !important;
-        padding-left: 25px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
+        padding: 1rem 1rem 1rem 1.5rem !important;
     }
     
     .stSuccess {
         background-color: #1e293b !important;
         border-left: 5px solid #10b981 !important;
-        padding-left: 25px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
+        padding: 1rem 1rem 1rem 1.5rem !important;
     }
     
     .stWarning {
         background-color: #1e293b !important;
         border-left: 5px solid #f59e0b !important;
-        padding-left: 25px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
+        padding: 1rem 1rem 1rem 1.5rem !important;
     }
     
     .stError {
         background-color: #1e293b !important;
         border-left: 5px solid #ef4444 !important;
-        padding-left: 25px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
+        padding: 1rem 1rem 1rem 1.5rem !important;
     }
     
     /* Links */
