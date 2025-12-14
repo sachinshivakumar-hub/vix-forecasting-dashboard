@@ -640,6 +640,12 @@ with st.sidebar:
         help="Number of days to forecast ahead"
     )
     
+    use_full_data = st.checkbox(
+        "Use full dataset for training",
+        value=False,
+        help="If checked: trains on 100% of data and forecasts future dates. If unchecked: uses train/test split for validation."
+    )
+    
     st.markdown("---")
     
     # About section
@@ -1152,10 +1158,19 @@ elif model_choice == "ARIMA":
     st.markdown(f"Box-Jenkins model with order (p={p_order}, d={d_order}, q={q_order})")
     
     with st.spinner(f"Fitting ARIMA{arima_order} model..."):
-        # Split data
-        split_idx = int(len(df) * train_size / 100)
-        train_returns = df['LogReturn'].iloc[:split_idx]
-        test_returns = df['LogReturn'].iloc[split_idx:]
+        # Split data based on mode
+        if use_full_data:
+            # Use ALL data for training, forecast future dates
+            split_idx = len(df)
+            train_returns = df['LogReturn']
+            test_returns = None
+            st.info(f"Using 100% of data ({len(df)} observations) for training. Forecasting {forecast_horizon} days into the future.")
+        else:
+            # Use train/test split for validation
+            split_idx = int(len(df) * train_size / 100)
+            train_returns = df['LogReturn'].iloc[:split_idx]
+            test_returns = df['LogReturn'].iloc[split_idx:]
+            st.info(f"Train/Test split: {split_idx} / {len(df) - split_idx} observations")
         
         try:
             # Fit model
@@ -1199,88 +1214,176 @@ elif model_choice == "ARIMA":
             # Forecasting
             st.subheader("Forecasting")
             
-            # Generate forecasts
-            forecast_obj = arima_result.get_forecast(steps=len(test_returns))
-            forecast_mean = forecast_obj.predicted_mean
-            forecast_ci = forecast_obj.conf_int(alpha=0.05)
+            if use_full_data:
+                # True out-of-sample forecasting
+                forecast_obj = arima_result.get_forecast(steps=forecast_horizon)
+                forecast_mean = forecast_obj.predicted_mean
+                forecast_ci = forecast_obj.conf_int(alpha=0.05)
+                
+                # Create future dates
+                last_date = df['Date'].iloc[-1]
+                forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=forecast_horizon, freq='B')
+                
+                st.success(f"Generated {forecast_horizon}-day ahead forecast beyond last observation ({last_date.strftime('%Y-%m-%d')})")
+                
+                # Forecast plot
+                fig = go.Figure()
+                
+                # Historical data (last 200 days for visibility)
+                hist_window = min(200, len(df))
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[-hist_window:],
+                    y=df['LogReturn'].iloc[-hist_window:],
+                    mode='lines',
+                    name='Historical Data',
+                    line=dict(color='#808080', width=1)
+                ))
+                
+                # Forecast
+                fig.add_trace(go.Scatter(
+                    x=forecast_dates,
+                    y=forecast_mean,
+                    mode='lines+markers',
+                    name='ARIMA Forecast',
+                    line=dict(color='#E50914', width=2),
+                    marker=dict(size=6)
+                ))
+                
+                # Confidence intervals
+                fig.add_trace(go.Scatter(
+                    x=forecast_dates,
+                    y=forecast_ci.iloc[:, 1],
+                    mode='lines',
+                    name='Upper 95% CI',
+                    line=dict(width=0),
+                    showlegend=False
+                ))
+                
+                fig.add_trace(go.Scatter(
+                    x=forecast_dates,
+                    y=forecast_ci.iloc[:, 0],
+                    mode='lines',
+                    name='95% CI',
+                    fill='tonexty',
+                    fillcolor='rgba(229, 9, 20, 0.2)',
+                    line=dict(width=0)
+                ))
+                
+                fig.add_vline(x=last_date, line_dash="dash", line_color="#B3B3B3", opacity=0.7)
+                
+                fig.update_layout(
+                    title=dict(text=f'ARIMA{arima_order} Future Forecast ({forecast_horizon} days ahead)', 
+                              font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                    xaxis_title='Date',
+                    yaxis_title='Log Return (%)',
+                    hovermode='x unified',
+                    template='plotly_dark',
+                    height=500,
+                    plot_bgcolor='#000000',
+                    paper_bgcolor='#000000',
+                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    legend=dict(font=dict(size=11))
+                )
+                
+                st.plotly_chart(fig, use_container_width=True)
+                
+                # Forecast table
+                forecast_df = pd.DataFrame({
+                    'Day': range(1, forecast_horizon + 1),
+                    'Date': forecast_dates,
+                    'Forecast': forecast_mean.values,
+                    'Lower 95% CI': forecast_ci.iloc[:, 0].values,
+                    'Upper 95% CI': forecast_ci.iloc[:, 1].values
+                })
+                
+                with st.expander("View Forecast Table"):
+                    st.dataframe(forecast_df, use_container_width=True, hide_index=True)
+                
+            else:
+                # In-sample validation forecasting
+                forecast_obj = arima_result.get_forecast(steps=len(test_returns))
+                forecast_mean = forecast_obj.predicted_mean
+                forecast_ci = forecast_obj.conf_int(alpha=0.05)
+                
+                # Calculate metrics
+                metrics = calculate_metrics(test_returns.values, forecast_mean.values)
+                
+                col1, col2, col3, col4 = st.columns(4)
+                col1.metric("MAE", f"{metrics['MAE']:.4f}")
+                col2.metric("RMSE", f"{metrics['RMSE']:.4f}")
+                col3.metric("MAPE", f"{metrics['MAPE']:.2f}%")
+                col4.metric("Direction Acc.", f"{metrics['Dir_Accuracy']:.1f}%")
+                
+                # Forecast plot
+                fig = go.Figure()
             
-            # Calculate metrics
-            metrics = calculate_metrics(test_returns.values, forecast_mean.values)
-            
-            col1, col2, col3, col4 = st.columns(4)
-            col1.metric("MAE", f"{metrics['MAE']:.4f}")
-            col2.metric("RMSE", f"{metrics['RMSE']:.4f}")
-            col3.metric("MAPE", f"{metrics['MAPE']:.2f}%")
-            col4.metric("Direction Acc.", f"{metrics['Dir_Accuracy']:.1f}%")
-            
-            # Forecast plot
-            fig = go.Figure()
-            
-            # Historical data
-            fig.add_trace(go.Scatter(
-                x=df['Date'].iloc[:split_idx],
-                y=train_returns,
-                mode='lines',
-                name='Training Data',
-                line=dict(color='#E50914', width=1),
-                opacity=0.6
-            ))
-            
-            # Actual test data
-            fig.add_trace(go.Scatter(
-                x=df['Date'].iloc[split_idx:],
-                y=test_returns,
-                mode='lines',
-                name='Actual Test Data',
-                line=dict(color='#B3B3B3', width=2)
-            ))
-            
-            # Forecast
-            fig.add_trace(go.Scatter(
-                x=df['Date'].iloc[split_idx:],
-                y=forecast_mean,
-                mode='lines',
-                name='ARIMA Forecast',
-                line=dict(color='#E50914', width=2)
-            ))
-            
-            # Confidence intervals
-            fig.add_trace(go.Scatter(
-                x=df['Date'].iloc[split_idx:],
-                y=forecast_ci.iloc[:, 1],
-                mode='lines',
-                name='Upper 95% CI',
-                line=dict(width=0),
-                showlegend=False
-            ))
-            
-            fig.add_trace(go.Scatter(
-                x=df['Date'].iloc[split_idx:],
-                y=forecast_ci.iloc[:, 0],
-                mode='lines',
-                name='95% CI',
-                fill='tonexty',
-                fillcolor='rgba(255, 165, 0, 0.2)',
-                line=dict(width=0)
-            ))
-            
-            fig.update_layout(
-                title=dict(text=f'ARIMA{arima_order} Forecast vs Actual Returns', 
-                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
-                xaxis_title='Date',
-                yaxis_title='Log Return (%)',
-                hovermode='x unified',
-                template='plotly_dark',
-                height=500,
-                plot_bgcolor='#000000',
-                paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                legend=dict(font=dict(size=11))
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
+                # Historical data
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[:split_idx],
+                    y=train_returns,
+                    mode='lines',
+                    name='Training Data',
+                    line=dict(color='#E50914', width=1),
+                    opacity=0.6
+                ))
+                
+                # Actual test data
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[split_idx:],
+                    y=test_returns,
+                    mode='lines',
+                    name='Actual Test Data',
+                    line=dict(color='#B3B3B3', width=2)
+                ))
+                
+                # Forecast
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[split_idx:],
+                    y=forecast_mean,
+                    mode='lines',
+                    name='ARIMA Forecast',
+                    line=dict(color='#E50914', width=2)
+                ))
+                
+                # Confidence intervals
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[split_idx:],
+                    y=forecast_ci.iloc[:, 1],
+                    mode='lines',
+                    name='Upper 95% CI',
+                    line=dict(width=0),
+                    showlegend=False
+                ))
+                
+                fig.add_trace(go.Scatter(
+                    x=df['Date'].iloc[split_idx:],
+                    y=forecast_ci.iloc[:, 0],
+                    mode='lines',
+                    name='95% CI',
+                    fill='tonexty',
+                    fillcolor='rgba(255, 165, 0, 0.2)',
+                    line=dict(width=0)
+                ))
+                
+                fig.update_layout(
+                    title=dict(text=f'ARIMA{arima_order} Forecast vs Actual Returns', 
+                              font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                    xaxis_title='Date',
+                    yaxis_title='Log Return (%)',
+                    hovermode='x unified',
+                    template='plotly_dark',
+                    height=500,
+                    plot_bgcolor='#000000',
+                    paper_bgcolor='#000000',
+                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    legend=dict(font=dict(size=11))
+                )
+                
+                st.plotly_chart(fig, use_container_width=True)
             
             st.markdown("---")
             
