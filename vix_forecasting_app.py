@@ -118,19 +118,15 @@ st.markdown("""
         padding-top: 3rem;
     }
     
-    /* Headers with cyan/blue gradient accent */
+    /* Headers with cyan/blue solid colors */
     h1 {
-        background: linear-gradient(135deg, #00D9FF 0%, #0099FF 50%, #9D4EDD 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #00D9FF !important;
         font-weight: 800;
         letter-spacing: 0.5px;
         text-transform: uppercase;
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         margin-bottom: 1.5rem;
         font-size: 2.8rem !important;
-        text-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
     }
     
     h2 {
@@ -144,7 +140,6 @@ st.markdown("""
         letter-spacing: 2px;
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         font-size: 1.8rem;
-        text-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
     }
     
     h3 {
@@ -182,15 +177,11 @@ st.markdown("""
     .main-header {
         font-size: 4rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #00D9FF 0%, #0099FF 50%, #9D4EDD 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #00D9FF;
         text-align: center;
         padding: 2rem 0 0.5rem 0;
         letter-spacing: 1px;
         text-transform: uppercase;
-        filter: drop-shadow(0 0 30px rgba(0, 217, 255, 0.5));
     }
     
     .sub-header {
@@ -201,7 +192,7 @@ st.markdown("""
         font-weight: 400;
     }
     
-    /* Metric cards - Colorful accents */
+    /* Metric cards - Elegant solid colors */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: 800;
@@ -209,7 +200,6 @@ st.markdown("""
         font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         white-space: nowrap;
         overflow: visible;
-        text-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
     }
     
     [data-testid="stMetricLabel"] {
@@ -421,7 +411,6 @@ st.markdown("""
     a:hover {
         color: #00FFFF !important;
         text-decoration: underline;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
     
     /* Dividers */
@@ -805,35 +794,35 @@ if model_choice == "Overview":
         y=df['Price'],
         mode='lines',
         name='VIX Price',
-        line=dict(color='#E50914', width=2),
+        line=dict(color='#00D9FF', width=2.5),
         fill='tozeroy',
-        fillcolor='rgba(229, 9, 20, 0.2)'
+        fillcolor='rgba(0, 217, 255, 0.15)'
     ))
     
     # Add title with date range
     chart_title = f"VIX Index Level Over Time ({df['Date'].min().year} - {df['Date'].max().year})"
     
     fig.update_layout(
-        title=dict(text=chart_title, font=dict(color='#FFFFFF', size=16, family='Computer Modern, Times New Roman, serif')),
+        title=dict(text=chart_title, font=dict(color='#E8F0F8', size=16, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
         xaxis_title='Date',
         yaxis_title='VIX Level',
         hovermode='x unified',
         template='plotly_dark',
         height=500,
-        plot_bgcolor='#000000',
-        paper_bgcolor='#000000',
-        font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=12),
+        plot_bgcolor='rgba(10, 25, 41, 0.4)',
+        paper_bgcolor='rgba(10, 25, 41, 0.2)',
+        font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=12),
         xaxis=dict(
-            gridcolor='#1a1a1a',
+            gridcolor='rgba(0, 153, 255, 0.15)',
             showgrid=True,
-            color='#FFFFFF',
-            title_font=dict(size=13, family='Computer Modern, Times New Roman, serif')
+            color='#E8F0F8',
+            title_font=dict(size=13, family='Segoe UI, Helvetica Neue, Arial, sans-serif')
         ),
         yaxis=dict(
-            gridcolor='#1a1a1a',
+            gridcolor='rgba(0, 153, 255, 0.15)',
             showgrid=True,
-            color='#FFFFFF',
-            title_font=dict(size=13, family='Computer Modern, Times New Roman, serif')
+            color='#E8F0F8',
+            title_font=dict(size=13, family='Segoe UI, Helvetica Neue, Arial, sans-serif')
         )
     )
     
@@ -852,24 +841,24 @@ if model_choice == "Overview":
             y=df['LogReturn'],
             mode='lines',
             name='Log Returns',
-            line=dict(color='#E50914', width=1.5),
-            opacity=0.8
+            line=dict(color='#0099FF', width=1.5),
+            opacity=0.85
         ))
         
-        fig_returns.add_hline(y=0, line_dash="dash", line_color="#FFFFFF", opacity=0.3)
+        fig_returns.add_hline(y=0, line_dash="dash", line_color="#B8C5D0", opacity=0.5)
         
         fig_returns.update_layout(
-            title=dict(text=f"Log Returns ({df['Date'].min().year} - {df['Date'].max().year})", font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+            title=dict(text=f"Log Returns ({df['Date'].min().year} - {df['Date'].max().year})", font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
             xaxis_title='Date',
             yaxis_title='Return (%)',
             hovermode='x unified',
             template='plotly_dark',
             height=400,
-            plot_bgcolor='#000000',
-            paper_bgcolor='#000000',
-            font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
-            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12))
+            plot_bgcolor='rgba(10, 25, 41, 0.4)',
+            paper_bgcolor='rgba(10, 25, 41, 0.2)',
+            font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+            xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#E8F0F8', title_font=dict(size=12)),
+            yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#E8F0F8', title_font=dict(size=12))
         )
         
         st.plotly_chart(fig_returns, use_container_width=True)
@@ -883,7 +872,7 @@ if model_choice == "Overview":
             x=df['LogReturn'],
             nbinsx=60,
             name='Returns',
-            marker_color='#E50914',
+            marker_color='#00D9FF',
             opacity=0.8
         ))
         
@@ -897,7 +886,7 @@ if model_choice == "Overview":
             y=normal_dist,
             mode='lines',
             name='Normal Distribution',
-            line=dict(color='#FFFFFF', width=2, dash='dash')
+            line=dict(color='#E8F0F8', width=2, dash='dash')
         ))
         
         fig_hist.update_layout(
@@ -906,11 +895,11 @@ if model_choice == "Overview":
             template='plotly_dark',
             height=400,
             showlegend=True,
-            plot_bgcolor='#000000',
-            paper_bgcolor='#000000',
-            font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-            xaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
-            yaxis=dict(gridcolor='#1a1a1a', color='#FFFFFF', title_font=dict(size=12)),
+            plot_bgcolor='rgba(10, 25, 41, 0.4)',
+            paper_bgcolor='rgba(10, 25, 41, 0.2)',
+            font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+            xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#E8F0F8', title_font=dict(size=12)),
+            yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', color='#E8F0F8', title_font=dict(size=12)),
             legend=dict(font=dict(size=11))
         )
         
@@ -993,33 +982,35 @@ if model_choice == "Overview":
     
     with col1:
         st.markdown("**Autocorrelation Function (ACF)**")
-        fig_acf, ax_acf = plt.subplots(figsize=(10, 4), facecolor='#000000')
-        ax_acf.set_facecolor('#000000')
-        plot_acf(df['LogReturn'], lags=40, ax=ax_acf, color='#E50914')
+        fig_acf, ax_acf = plt.subplots(figsize=(10, 4), facecolor='#0A1929')
+        ax_acf.set_facecolor('#0A1929')
+        plot_acf(df['LogReturn'], lags=40, ax=ax_acf, color='#00D9FF')
         ax_acf.set_title("")
-        ax_acf.tick_params(colors='#FFFFFF')
-        ax_acf.spines['bottom'].set_color('#FFFFFF')
-        ax_acf.spines['left'].set_color('#FFFFFF')
+        ax_acf.tick_params(colors='#E8F0F8')
+        ax_acf.spines['bottom'].set_color('#E8F0F8')
+        ax_acf.spines['left'].set_color('#E8F0F8')
         ax_acf.spines['top'].set_visible(False)
         ax_acf.spines['right'].set_visible(False)
-        ax_acf.set_xlabel('Lag', color='#FFFFFF')
-        ax_acf.set_ylabel('ACF', color='#FFFFFF')
+        ax_acf.set_xlabel('Lag', color='#E8F0F8')
+        ax_acf.set_ylabel('ACF', color='#E8F0F8')
+        ax_acf.grid(True, alpha=0.15, color='#0099FF')
         st.pyplot(fig_acf)
         plt.close()
     
     with col2:
         st.markdown("**Partial Autocorrelation Function (PACF)**")
-        fig_pacf, ax_pacf = plt.subplots(figsize=(10, 4), facecolor='#000000')
-        ax_pacf.set_facecolor('#000000')
-        plot_pacf(df['LogReturn'], lags=40, ax=ax_pacf, method='ywm', color='#E50914')
+        fig_pacf, ax_pacf = plt.subplots(figsize=(10, 4), facecolor='#0A1929')
+        ax_pacf.set_facecolor('#0A1929')
+        plot_pacf(df['LogReturn'], lags=40, ax=ax_pacf, method='ywm', color='#00D9FF')
         ax_pacf.set_title("")
-        ax_pacf.tick_params(colors='#FFFFFF')
-        ax_pacf.spines['bottom'].set_color('#FFFFFF')
-        ax_pacf.spines['left'].set_color('#FFFFFF')
+        ax_pacf.tick_params(colors='#E8F0F8')
+        ax_pacf.spines['bottom'].set_color('#E8F0F8')
+        ax_pacf.spines['left'].set_color('#E8F0F8')
         ax_pacf.spines['top'].set_visible(False)
         ax_pacf.spines['right'].set_visible(False)
-        ax_pacf.set_xlabel('Lag', color='#FFFFFF')
-        ax_pacf.set_ylabel('PACF', color='#FFFFFF')
+        ax_pacf.set_xlabel('Lag', color='#E8F0F8')
+        ax_pacf.set_ylabel('PACF', color='#E8F0F8')
+        ax_pacf.grid(True, alpha=0.15, color='#0099FF')
         st.pyplot(fig_pacf)
         plt.close()
     
@@ -1097,15 +1088,15 @@ elif model_choice == "OLS AR(1)":
                 x=model_data.index,
                 y=resid,
                 mode='lines',
-                line=dict(color='#E50914', width=1),
+                line=dict(color='#0099FF', width=1.5),
                 name='Residuals'
             ))
-            fig_resid.add_hline(y=0, line_dash="dash", line_color="#FFFFFF")
+            fig_resid.add_hline(y=0, line_dash="dash", line_color="#B8C5D0")
             fig_resid.update_layout(height=300, showlegend=False, template='plotly_dark', 
-                                   plot_bgcolor='#000000', paper_bgcolor='#000000',
-                                   font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=10),
-                                   xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)),
-                                   yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)))
+                                   plot_bgcolor='rgba(10, 25, 41, 0.4)', paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                                   font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=10),
+                                   xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)),
+                                   yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)))
             st.plotly_chart(fig_resid, use_container_width=True)
         
         with col2:
@@ -1114,35 +1105,35 @@ elif model_choice == "OLS AR(1)":
             fig_hist.add_trace(go.Histogram(
                 x=resid,
                 nbinsx=30,
-                marker_color='#E50914',
+                marker_color='#00D9FF',
                 opacity=0.8
             ))
             fig_hist.update_layout(height=300, showlegend=False, template='plotly_dark',
-                                  plot_bgcolor='#000000', paper_bgcolor='#000000',
-                                  font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=10),
-                                  xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)),
-                                  yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=11)))
+                                  plot_bgcolor='rgba(10, 25, 41, 0.4)', paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                                  font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=10),
+                                  xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)),
+                                  yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=11)))
             st.plotly_chart(fig_hist, use_container_width=True)
         
         with col3:
             st.markdown("**Q-Q Plot**")
-            fig_qq, ax_qq = plt.subplots(figsize=(5, 4), facecolor='#000000')
-            ax_qq.set_facecolor('#000000')
+            fig_qq, ax_qq = plt.subplots(figsize=(5, 4), facecolor='#0A1929')
+            ax_qq.set_facecolor('#0A1929')
             probplot(resid, dist="norm", plot=ax_qq)
             ax_qq.set_title("")
-            ax_qq.grid(True, alpha=0.2, color='#FFFFFF')
-            ax_qq.tick_params(colors='#FFFFFF')
-            ax_qq.spines['bottom'].set_color('#FFFFFF')
-            ax_qq.spines['left'].set_color('#FFFFFF')
-            ax_qq.spines['top'].set_color('#FFFFFF')
-            ax_qq.spines['right'].set_color('#FFFFFF')
+            ax_qq.grid(True, alpha=0.15, color='#0099FF')
+            ax_qq.tick_params(colors='#E8F0F8')
+            ax_qq.spines['bottom'].set_color('#E8F0F8')
+            ax_qq.spines['left'].set_color('#E8F0F8')
+            ax_qq.spines['top'].set_color('#E8F0F8')
+            ax_qq.spines['right'].set_color('#E8F0F8')
             # Change line colors - first line is scatter points, second is reference line
             lines = ax_qq.get_lines()
             if len(lines) >= 1:
-                lines[0].set_color('#E50914')  # Residual points in red
+                lines[0].set_color('#00D9FF')  # Residual points in cyan
                 lines[0].set_markersize(4)
             if len(lines) >= 2:
-                lines[1].set_color('#B3B3B3')  # Reference line in grey
+                lines[1].set_color('#B8C5D0')  # Reference line in grey
                 lines[1].set_linewidth(1.5)
             st.pyplot(fig_qq)
             plt.close()
@@ -1277,7 +1268,7 @@ elif model_choice == "ARIMA":
                     y=df['LogReturn'].iloc[-hist_window:],
                     mode='lines',
                     name='Historical Data',
-                    line=dict(color='#808080', width=1)
+                    line=dict(color='#B8C5D0', width=1.5)
                 ))
                 
                 # Forecast
@@ -1286,8 +1277,8 @@ elif model_choice == "ARIMA":
                     y=forecast_mean,
                     mode='lines+markers',
                     name='ARIMA Forecast',
-                    line=dict(color='#E50914', width=2),
-                    marker=dict(size=6)
+                    line=dict(color='#00D9FF', width=2.5),
+                    marker=dict(size=6, color='#00D9FF')
                 ))
                 
                 # Confidence intervals
@@ -1306,25 +1297,25 @@ elif model_choice == "ARIMA":
                     mode='lines',
                     name='95% CI',
                     fill='tonexty',
-                    fillcolor='rgba(229, 9, 20, 0.2)',
+                    fillcolor='rgba(0, 217, 255, 0.15)',
                     line=dict(width=0)
                 ))
                 
-                fig.add_vline(x=last_date, line_dash="dash", line_color="#B3B3B3", opacity=0.7)
+                fig.add_vline(x=last_date, line_dash="dash", line_color="#B8C5D0", opacity=0.7)
                 
                 fig.update_layout(
                     title=dict(text=f'ARIMA{arima_order} Future Forecast ({forecast_horizon} days ahead)', 
-                              font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                              font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
                     xaxis_title='Date',
                     yaxis_title='Log Return (%)',
                     hovermode='x unified',
                     template='plotly_dark',
                     height=500,
-                    plot_bgcolor='#000000',
-                    paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
@@ -1366,8 +1357,8 @@ elif model_choice == "ARIMA":
                     y=train_returns,
                     mode='lines',
                     name='Training Data',
-                    line=dict(color='#E50914', width=1),
-                    opacity=0.6
+                    line=dict(color='#0099FF', width=1.5),
+                    opacity=0.7
                 ))
                 
                 # Actual test data
@@ -1376,7 +1367,7 @@ elif model_choice == "ARIMA":
                     y=test_returns,
                     mode='lines',
                     name='Actual Test Data',
-                    line=dict(color='#B3B3B3', width=2)
+                    line=dict(color='#B8C5D0', width=2.5)
                 ))
                 
                 # Forecast
@@ -1385,7 +1376,7 @@ elif model_choice == "ARIMA":
                     y=forecast_mean,
                     mode='lines',
                     name='ARIMA Forecast',
-                    line=dict(color='#E50914', width=2)
+                    line=dict(color='#00D9FF', width=2.5)
                 ))
                 
                 # Confidence intervals
@@ -1404,23 +1395,23 @@ elif model_choice == "ARIMA":
                     mode='lines',
                     name='95% CI',
                     fill='tonexty',
-                    fillcolor='rgba(255, 165, 0, 0.2)',
+                    fillcolor='rgba(0, 217, 255, 0.15)',
                     line=dict(width=0)
                 ))
                 
                 fig.update_layout(
                     title=dict(text=f'ARIMA{arima_order} Forecast vs Actual Returns', 
-                              font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                              font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
                     xaxis_title='Date',
                     yaxis_title='Log Return (%)',
                     hovermode='x unified',
                     template='plotly_dark',
                     height=500,
-                    plot_bgcolor='#000000',
-                    paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
@@ -1540,24 +1531,24 @@ elif model_choice == "GARCH(1,1)":
                 y=cond_vol,
                 mode='lines',
                 name='Conditional Volatility',
-                line=dict(color='darkgreen', width=1.5),
+                line=dict(color='#06FFA5', width=2),
                 fill='tozeroy',
-                fillcolor='rgba(0, 100, 0, 0.1)'
+                fillcolor='rgba(6, 255, 165, 0.1)'
             ))
             
             fig.update_layout(
                 title=dict(text='In-Sample Conditional Volatility (GARCH)',
-                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                          font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
                 template='plotly_dark',
                 height=400,
-                plot_bgcolor='#000000',
-                paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                 legend=dict(font=dict(size=11))
             )
             
@@ -1584,7 +1575,7 @@ elif model_choice == "GARCH(1,1)":
                 y=cond_vol[-hist_window:],
                 mode='lines',
                 name='Historical Volatility',
-                line=dict(color='#808080', width=1.5)
+                line=dict(color='#B8C5D0', width=1.5)
             ))
             
             # Forecast
@@ -1593,25 +1584,25 @@ elif model_choice == "GARCH(1,1)":
                 y=vol_forecast,
                 mode='lines+markers',
                 name='Volatility Forecast',
-                line=dict(color='#E50914', width=2),
-                marker=dict(size=6)
+                line=dict(color='#00D9FF', width=2.5),
+                marker=dict(size=6, color='#00D9FF')
             ))
             
-            fig_forecast.add_vline(x=last_date, line_dash="dash", line_color="black", opacity=0.5)
+            fig_forecast.add_vline(x=last_date, line_dash="dash", line_color="#B8C5D0", opacity=0.5)
             
             fig_forecast.update_layout(
                 title=dict(text=f'GARCH(1,1) Volatility Forecast ({forecast_horizon} days ahead)',
-                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                          font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
                 xaxis_title='Date',
                 yaxis_title='Volatility (decimal)',
                 hovermode='x unified',
                 template='plotly_dark',
                 height=500,
-                plot_bgcolor='#000000',
-                paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                 legend=dict(font=dict(size=11))
             )
             
@@ -1752,7 +1743,7 @@ elif model_choice == "Compare All":
                 y=test_returns,
                 mode='lines',
                 name='Actual',
-                line=dict(color='#B3B3B3', width=2)
+                line=dict(color='#E8F0F8', width=2.5)
             ))
             
             # OLS
@@ -1761,7 +1752,7 @@ elif model_choice == "Compare All":
                 y=ols_forecasts,
                 mode='lines',
                 name='OLS AR(1)',
-                line=dict(color='#E50914', width=1.5, dash='dot')
+                line=dict(color='#00D9FF', width=2, dash='dot')
             ))
             
             # ARIMA
@@ -1770,7 +1761,7 @@ elif model_choice == "Compare All":
                 y=arima_forecasts,
                 mode='lines',
                 name='ARIMA(1,0,1)',
-                line=dict(color='#808080', width=1.5, dash='dash')
+                line=dict(color='#0099FF', width=2, dash='dash')
             ))
             
             # Naive
@@ -1779,25 +1770,25 @@ elif model_choice == "Compare All":
                 y=naive_forecast,
                 mode='lines',
                 name='Naive',
-                line=dict(color='red', width=1, dash='dashdot'),
-                opacity=0.5
+                line=dict(color='#9D4EDD', width=1.5, dash='dashdot'),
+                opacity=0.6
             ))
             
-            fig.add_hline(y=0, line_dash="solid", line_color="gray", opacity=0.3)
+            fig.add_hline(y=0, line_dash="solid", line_color="#B8C5D0", opacity=0.4)
             
             fig.update_layout(
                 title=dict(text='Model Forecast Comparison (Test Set)',
-                          font=dict(color='#FFFFFF', size=14, family='Computer Modern, Times New Roman, serif')),
+                          font=dict(color='#E8F0F8', size=14, family='Segoe UI, Helvetica Neue, Arial, sans-serif')),
                 xaxis_title='Date',
                 yaxis_title='Log Return (%)',
                 hovermode='x unified',
                 template='plotly_dark',
                 height=500,
-                plot_bgcolor='#000000',
-                paper_bgcolor='#000000',
-                font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11))
             )
             
@@ -1818,28 +1809,28 @@ elif model_choice == "Compare All":
                 fig_errors.add_trace(go.Box(
                     y=test_returns.values - ols_forecasts,
                     name='OLS',
-                    marker_color='#E50914'
+                    marker_color='#00D9FF'
                 ))
                 
                 fig_errors.add_trace(go.Box(
                     y=test_returns.values - arima_forecasts,
                     name='ARIMA',
-                    marker_color='#FFFFFF'
+                    marker_color='#0099FF'
                 ))
                 
                 fig_errors.add_trace(go.Box(
                     y=test_returns.values - naive_forecast,
                     name='Naive',
-                    marker_color='#E50914'
+                    marker_color='#9D4EDD'
                 ))
                 
                 fig_errors.update_layout(
                     yaxis_title='Forecast Error',
                     template='plotly_dark',
                     height=400,
-                    plot_bgcolor='#000000',
-                    paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
+                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                     xaxis=dict(title_font=dict(size=12)),
                     yaxis=dict(title_font=dict(size=12))
                 )
@@ -1855,21 +1846,21 @@ elif model_choice == "Compare All":
                     y=np.cumsum((test_returns.values - ols_forecasts)**2),
                     mode='lines',
                     name='OLS',
-                    line=dict(color='#E50914', width=2)
+                    line=dict(color='#00D9FF', width=2.5)
                 ))
                 
                 fig_cumsum.add_trace(go.Scatter(
                     y=np.cumsum((test_returns.values - arima_forecasts)**2),
                     mode='lines',
                     name='ARIMA',
-                    line=dict(color='#B3B3B3', width=2)
+                    line=dict(color='#0099FF', width=2.5)
                 ))
                 
                 fig_cumsum.add_trace(go.Scatter(
                     y=np.cumsum((test_returns.values - naive_forecast)**2),
                     mode='lines',
                     name='Naive',
-                    line=dict(color='#808080', width=2)
+                    line=dict(color='#9D4EDD', width=2.5)
                 ))
                 
                 fig_cumsum.update_layout(
@@ -1877,11 +1868,11 @@ elif model_choice == "Compare All":
                     yaxis_title='Cumulative Squared Error',
                     template='plotly_dark',
                     height=400,
-                    plot_bgcolor='#000000',
-                    paper_bgcolor='#000000',
-                    font=dict(color='#FFFFFF', family='Computer Modern, Times New Roman, serif', size=11),
-                    xaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
-                    yaxis=dict(gridcolor='#1a1a1a', title_font=dict(size=12)),
+                    plot_bgcolor='rgba(10, 25, 41, 0.4)',
+                    paper_bgcolor='rgba(10, 25, 41, 0.2)',
+                    font=dict(color='#E8F0F8', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
+                    xaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
+                    yaxis=dict(gridcolor='rgba(0, 153, 255, 0.15)', title_font=dict(size=12)),
                     legend=dict(font=dict(size=11))
                 )
                 
