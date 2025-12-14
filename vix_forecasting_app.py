@@ -130,6 +130,16 @@ st.markdown("""
         margin-bottom: 2.5rem;
     }
     
+    h4, h5, h6 {
+        font-weight: 600;
+        color: #FFFFFF !important;
+    }
+    
+    /* Add spacing for any element with left border */
+    [style*="border-left"] {
+        padding-left: 25px !important;
+    }
+    
     .stMarkdown {
         color: #FFFFFF;
     }
@@ -188,6 +198,9 @@ st.markdown("""
         background-color: #1e293b !important;
         border-left: 4px solid #60a5fa !important;
         color: #FFFFFF !important;
+        padding-left: 25px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
     
     .stAlert p {
@@ -199,6 +212,7 @@ st.markdown("""
         background-color: #1e293b !important;
         border: 2px solid #60a5fa !important;
         border-radius: 8px;
+        padding: 15px !important;
     }
     
     .stDataFrame th {
@@ -207,14 +221,14 @@ st.markdown("""
         font-weight: 700;
         text-transform: uppercase;
         font-size: 0.85rem;
-        padding: 14px 12px !important;
+        padding: 14px 20px !important;
     }
     
     .stDataFrame td {
         background-color: #1e293b !important;
         color: #FFFFFF !important;
         border-color: #334155 !important;
-        padding: 12px 12px !important;
+        padding: 12px 20px !important;
         font-size: 1rem;
     }
     
@@ -301,6 +315,7 @@ st.markdown("""
         border: 2px solid #334155;
         border-radius: 8px;
         font-weight: 600;
+        padding: 15px 20px !important;
     }
     
     .streamlit-expanderHeader:hover {
@@ -312,21 +327,33 @@ st.markdown("""
     div[data-baseweb="notification"] {
         background-color: #1e293b !important;
         border-left: 5px solid #60a5fa !important;
+        padding-left: 25px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
     
     .stSuccess {
         background-color: #1e293b !important;
         border-left: 5px solid #10b981 !important;
+        padding-left: 25px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
     
     .stWarning {
         background-color: #1e293b !important;
         border-left: 5px solid #f59e0b !important;
+        padding-left: 25px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
     
     .stError {
         background-color: #1e293b !important;
         border-left: 5px solid #ef4444 !important;
+        padding-left: 25px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
     
     /* Links */
