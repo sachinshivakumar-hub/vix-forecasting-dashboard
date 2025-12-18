@@ -44,7 +44,7 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(
     page_title="VIX Forecasting Dashboard",
-    page_icon="�",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -731,15 +731,14 @@ def diebold_mariano_test(actual, forecast1, forecast2):
 
 with st.sidebar:
     st.markdown("---")
-    st.header("⚙️ Configuration")
+    st.header("Configuration")
     
     # File upload with custom styling
-    st.subheader("📁 Data Upload")
+    st.subheader("Data Upload")
     
     # Custom upload container with better formatting
     st.markdown("""
         <div style='text-align: center; padding: 1rem 0 0.75rem 0; margin-bottom: 0.5rem;'>
-            <div style='font-size: 3rem; margin-bottom: 0.75rem; line-height: 1;'>📊</div>
             <div style='color: #e2e8f0; font-size: 1rem; margin-bottom: 0.5rem; font-weight: 500;'>
                 Drag & Drop your VIX CSV file
             </div>
@@ -761,14 +760,14 @@ with st.sidebar:
             <div style='background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
                         padding: 0.75rem 1rem; border-radius: 8px; margin: 0.75rem 0;
                         text-align: center; border-left: 4px solid #065f46;'>
-                <div style='color: white; font-weight: 600;'>✅ File Successfully Loaded</div>
+                <div style='color: white; font-weight: 600;'>File Successfully Loaded</div>
                 <div style='color: #d1fae5; font-size: 0.9rem; margin-top: 0.25rem;'>{uploaded_file.name}</div>
                 <div style='color: #a7f3d0; font-size: 0.85rem;'>Size: {uploaded_file.size / 1024:.2f} KB</div>
             </div>
         """, unsafe_allow_html=True)
     
     use_sample = st.checkbox(
-        "📈 Use sample VIX data", 
+        "Use sample VIX data", 
         value=not uploaded_file,
         help="Load pre-loaded VIX historical data for testing"
     )
@@ -788,7 +787,7 @@ with st.sidebar:
     
     # Model parameters
     if "ARIMA" in model_choice:
-        st.subheader("🎛️ ARIMA Parameters")
+        st.subheader("ARIMA Parameters")
         p_order = st.slider("AR order (p)", 0, 5, 1, help="Autoregressive order")
         d_order = st.slider("Differencing (d)", 0, 2, 0, help="Degree of differencing")
         q_order = st.slider("MA order (q)", 0, 5, 1, help="Moving average order")
@@ -797,7 +796,7 @@ with st.sidebar:
     st.markdown("---")
     
     # Analysis parameters
-    st.subheader("⚡ Analysis Settings")
+    st.subheader("Analysis Settings")
     train_size = st.slider(
         "Training set size (%)",
         50, 95, 80,
@@ -811,7 +810,7 @@ with st.sidebar:
     )
     
     use_full_data = st.checkbox(
-        "🎯 Use full dataset for training",
+        "Use full dataset for training",
         value=False,
         help="If checked: trains on 100% of data and forecasts future dates. If unchecked: uses train/test split for validation."
     )
@@ -843,7 +842,7 @@ with st.sidebar:
 # Header
 st.markdown('<p class="main-header">VIX Volatility Forecasting</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Advanced Time Series Analysis | FIN41660 Financial Econometrics</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #808080; font-size: 13px; margin-top: -10px;">Karthik PSB • Sachin Shivakumar • Pavan • Alexander Pokhilo</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #808080; font-size: 13px; margin-top: -10px;">Karthik PSB • Sachin Shivakumar • Pavan Kapoor • Alexander Pokhilo</p>', unsafe_allow_html=True)
 
 # Load data
 if uploaded_file:
@@ -1196,7 +1195,7 @@ elif model_choice == "OLS AR(1)":
             ar1 = ols_model.params['Lag1']
             
             if abs(ar1) < 0.1 and ols_model.pvalues['Lag1'] > 0.05:
-                st.info("🔍 Weak autocorrelation - VIX returns are approximately white noise in the mean")
+                st.info("Weak autocorrelation - VIX returns are approximately white noise in the mean")
             elif ar1 > 0 and ols_model.pvalues['Lag1'] < 0.05:
                 st.success(f"Significant positive persistence (φ = {ar1:.4f}) - momentum in returns")
             elif ar1 < 0 and ols_model.pvalues['Lag1'] < 0.05:
@@ -1280,7 +1279,7 @@ elif model_choice == "OLS AR(1)":
         
         # Diagnostic tests
         st.markdown("---")
-        st.subheader("📋 Statistical Tests")
+        st.subheader("Statistical Tests")
         
         col1, col2 = st.columns(2)
         
@@ -1756,7 +1755,7 @@ elif model_choice == "GARCH(1,1)":
                 'Variance': var_forecast
             })
             
-            with st.expander("📋 View Forecast Table"):
+            with st.expander("View Forecast Table"):
                 st.dataframe(forecast_df, use_container_width=True, hide_index=True)
         
         except Exception as e:
