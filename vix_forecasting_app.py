@@ -1039,7 +1039,7 @@ if model_choice == "Overview":
             font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
             xaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12)),
             yaxis=dict(gridcolor="#334155", color='#FFFFFF', title_font=dict(size=12)),
-            legend=dict(font=dict(size=11))
+            legend=dict(font=dict(size=11, color='#FFFFFF'))
         )
         
         st.plotly_chart(fig_hist, use_container_width=True)
@@ -1455,7 +1455,7 @@ elif model_choice == "ARIMA":
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                     xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                    legend=dict(font=dict(size=11))
+                    legend=dict(font=dict(size=11, color='#FFFFFF'))
                 )
                 
                 st.plotly_chart(fig, use_container_width=True)
@@ -1551,7 +1551,7 @@ elif model_choice == "ARIMA":
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                     xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                    legend=dict(font=dict(size=11))
+                    legend=dict(font=dict(size=11, color='#FFFFFF'))
                 )
                 
                 st.plotly_chart(fig, use_container_width=True)
@@ -1688,7 +1688,7 @@ elif model_choice == "GARCH(1,1)":
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                 xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                legend=dict(font=dict(size=11))
+                legend=dict(font=dict(size=11, color='#FFFFFF'))
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -1742,7 +1742,7 @@ elif model_choice == "GARCH(1,1)":
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                 xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                legend=dict(font=dict(size=11))
+                legend=dict(font=dict(size=11, color='#FFFFFF'))
             )
             
             st.plotly_chart(fig_forecast, use_container_width=True)
@@ -1928,7 +1928,7 @@ elif model_choice == "Compare All":
                 font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                 xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                 yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11))
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11, color='#FFFFFF'))
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -2012,7 +2012,7 @@ elif model_choice == "Compare All":
                     font=dict(color='#FFFFFF', family='Segoe UI, Helvetica Neue, Arial, sans-serif', size=11),
                     xaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
                     yaxis=dict(gridcolor="#334155", title_font=dict(size=12)),
-                    legend=dict(font=dict(size=11))
+                    legend=dict(font=dict(size=11, color='#FFFFFF'))
                 )
                 
                 st.plotly_chart(fig_cumsum, use_container_width=True)
